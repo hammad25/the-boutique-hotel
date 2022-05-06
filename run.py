@@ -12,8 +12,29 @@ SCOPED_CREDS = CREDS.with_scopes(SCOPE)
 GSPREAD_CLIENT = gspread.authorize(SCOPED_CREDS)
 SHEET = GSPREAD_CLIENT.open('The-Boutique-Hotel')
 
-bookings = SHEET.worksheet('bookings')
 
-booking_info = bookings.get_all_values()
+def Main_menu():
+    """
+    Management system home page
+    """
+    print("\nWelcome to The Boutique Hotel\n")
 
-print(booking_info)
+    print("1. Enter/Manage Customer Data")
+    print("2. Enter/Manage Room Price")
+    print("3. Display Total Cost")
+    print("4. EXIT")
+
+
+
+
+
+
+def main():
+    """
+    Create a new booking 
+    """
+    Main_menu()
+    
+
+
+main()
