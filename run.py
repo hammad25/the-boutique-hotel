@@ -93,10 +93,13 @@ def Sub_customer_menu():
     print("2. Display Customer Data")
     print("3. Back to main menu")
 
+Count = 0
 def main():
     """
     fuction for main menu
     """
+
+    CustomerList = []
     while True:
         Main_menu()
         try:
@@ -114,8 +117,10 @@ def main():
                         print("Please enter a number")
                     else:
                         if(subMenu==1):
-                            CustomerObj=Customer()
-                            CustomerObj.Set_customer_date()
+                            CustomerList.append(Customer())
+                            global COUNT
+                            CustomerList[COUNT].Set_customer_data()
+                            COUNT=COUNT+1
                         elif(subMenu==2):
                             try:
                                 CustomerObj.Get_customer_date()
