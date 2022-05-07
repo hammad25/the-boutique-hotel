@@ -32,7 +32,7 @@ def Sub_customer_menu():
 
 def Sub_booking_Display_menu():
     print("1. Display all Booking Data")
-    print("2. Display Booking Data by BookingID")
+    print("2. Display Booking Data by Booking ID")
     print("3. Back to main menu")
 
 def clearScreen():
@@ -42,15 +42,6 @@ def clearScreen():
         os.system("clear")
     else:
         print("*/ PLATFORM NOT SUPPORTED /*")
-
-
-class Room:
-    TotalPrice = 0
-    def __init__(self):
-        self.RoomNum= None
-        self.RoomType = None
-        self.NumofGuests = 0
-    
 
 
 class Customer:
@@ -67,6 +58,10 @@ class Customer:
         self.customer_checkout_date = datetime.today().strftime('%d/%m/%Y')
         Customer.num_of_customers += 1
         self.total_customers = Customer.num_of_customers
+        self.RoomType = None
+        self.NumofGuests = 0
+        self.NumofNights = 0
+        self.TotalPrice = 0
 
     def Set_customer_data(self,update=False):
 
@@ -83,10 +78,12 @@ class Customer:
             self.customer_checkout_date = input("Enter Customer CheckOutDate  (day/month/year) =")
             try:
                 self.customer_checkout_date = datetime.strptime(self.customer_checkout_date, "%d/%m/%Y").strftime("%d/%m/%Y")
-
                 break
             except ValueError:
                 print("Error: must be format dd/mm/yyyy ")
+        
+        self.NumOfNight=datetime.strptime(self.customer_checkout_date,"%d/%m/%Y").date()-datetime.strptime(self.customer_checkin_date,"%d/%m/%Y").date()
+        self.NumofNights = self.NumofNights.days
 
         if update==False:
             input("Press any key to continue...")
