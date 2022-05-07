@@ -107,9 +107,6 @@ class Customer:
                     print("Guests must be between 1 to 3")
             except ValueError:
                 print("Please enter a number!")
-        if update==False:
-            input("Press any key to continue...")
-            clearScreen()
 
         if update==False:
             input("Press any key to continue...")
@@ -121,13 +118,24 @@ class Customer:
         """
         print("Total Number Of Customers= "+str(self.total_customers))
 
+    def Total_price_Calculation(self):
+        if(self.RoomType == "standard"):
+            self.TotalPrice = int(self.NumOfNight) * self.NumofGuests * 200
+        elif(self.RoomType == "deluxe"):
+            self.TotalPrice = int(self.NumOfNight) * 400 * self.NumOfGuests
+        return self.TotalPrice
+        
+
+
     def Get_customer_data(self):
         print("\n************************\n")
         print("Customer ID="+str(self.customer_id[0]))
         print("Customer Name="+self.customer_name)
         print("Customer Address="+self.customer_address)
+        print("Room Type = " +self.RoomType)
         print("Customer CheckInDate="+str(self.customer_checkin_date))
         print("Customer CheckOutDate="+str(self.customer_checkout_date))
+        print("Total Price="+str(Total_price_Calculation())
         print("\n************************\n")
 
     def Get_customer_id(self):
