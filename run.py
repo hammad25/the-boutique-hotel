@@ -24,10 +24,10 @@ def Main_menu():
     print("3. EXIT")
 
 def Sub_customer_menu():
-    print("1. Enter a Customer Data")
-    print("2. Display Customer Data")
-    print("3. Delete Customer Data")
-    print("4. Update Customer Data")
+    print("1. Enter a Customer")
+    print("2. Display Customer")
+    print("3. Delete Customer")
+    print("4. Update Customer")
     print("5. Back to main menu")
 
 def Sub_booking_Display_menu():
@@ -53,6 +53,7 @@ class Customer:
     def __init__(self):
         self.customer_id =  random.sample(range(1, 10000), 1)
         self.customer_name = None
+        self.customer_age = None
         self.customer_address = None
         self.customer_checkin_date = datetime.today().strftime('%d/%m/%Y')
         self.customer_checkout_date = datetime.today().strftime('%d/%m/%Y')
@@ -67,6 +68,19 @@ class Customer:
 
         self.customer_name = input("Enter Customer Name=")
         self.customer_address = input("Enter Customer Address=")
+        while True :
+            self.customer_age = int(input("Enter Customer age ="))
+            try:
+                if self.customer_age < 18:
+                    print("Customer must be over 18")
+            except ValueError():
+                print("Please enter a number")
+
+
+                self.customer_checkin_date = datetime.strptime(self.customer_checkin_date , "%d/%m/%Y").strftime("%d/%m/%Y")
+                break
+            except ValueError:
+                print("Error: must be format dd/mm/yyyy ")
         while True :
             self.customer_checkin_date  = input("Enter Customer CheckInDate (day/month/year) =")
             try:
@@ -131,6 +145,7 @@ class Customer:
         print("\n************************\n")
         print("Customer ID="+str(self.customer_id[0]))
         print("Customer Name="+self.customer_name)
+        print("Customer Age="+self.customer_age)
         print("Customer Address="+self.customer_address)
         print("Room Type = " +self.RoomType)
         print("Customer CheckInDate="+str(self.customer_checkin_date))
@@ -243,14 +258,8 @@ def main():
             if (choice == 2):
                 print("Room Price")
             if (choice == 3):
-                print(" Restutant bill")
-            if (choice == 4):
-                print(" Spa bill")
-            if (choice == 5):
-                print(" Total cost")
-            if (choice == 6):
                 quit()
-            if (choice > 6):
+            if (choice > 3):
                 print("Please select a valid choice")
 
 main()
