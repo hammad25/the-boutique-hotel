@@ -155,7 +155,7 @@ class Customer:
         print("Room Type = " +self.RoomType)
         print("Customer CheckInDate="+str(self.customer_checkin_date))
         print("Customer CheckOutDate="+str(self.customer_checkout_date))
-        print("Total Price="+str(self.Total_price_Calculation())
+        print("Total Price="+str(self.Total_price_Calculation()))
         print("\n************************\n")
 
     def Get_customer_id(self):
@@ -179,7 +179,10 @@ def main():
             while True:
                 if (choice == 1):
                     Sub_booking_menu()
-                    
+                    try:
+                        subMenu=int(input(("Enter your choice =")))
+                    except ValueError:
+                        print("Please enter a number")
                     else:
                         if(subMenu==1):
                             CustomerList.append(Customer())
@@ -259,13 +262,13 @@ def main():
                             print("Please select a valid choice")
                 if (choice == 2):
                     clearScreen()
-                    Sub_booking_Display_menu():
+                    Sub_booking_Display_menu()
                     try:
                         subMenu=int(input(("Enter your choice =")))
                     except ValueError:
                         print("Please enter a number")
-                    else :
-                        if (subMenu == 1 ):
+                    else:
+                        if(subMenu==1):
                             try:
                                 if len(CustomerList)!=0:
                                     for i in range(0,len(CustomerList)):
@@ -303,7 +306,9 @@ def main():
                                 clearScreen()
                                 Sub_booking_menu()
                                 clearScreen()
-                            
+                        elif(subMenu==3):
+                            clearScreen()
+                            Main_menu()
             if (choice == 3):
                 quit()
             if (choice > 3):
