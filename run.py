@@ -18,6 +18,25 @@ GSPREAD_CLIENT = gspread.authorize(SCOPED_CREDS)
 SHEET = GSPREAD_CLIENT.open('The-Boutique-Hotel')
 
 
+def Main_menu():
+    print("1. Enter/Manage Customer Data")
+    print("2. Enter/Manage Room Price")
+    print("3. Enter/Manage Restaurant Bill")
+    print("4. Enter/Manage Spa Bill")
+    print("5. Display Total Cost")
+    print("6. EXIT")
+
+def Sub_customer_menu():
+    print("1. Enter a Customer Data")
+    print("2. Display Customer Data")
+    print("3. Delete Customer Data")
+    print("4. Update Customer Data")
+    print("5. Back to main menu")
+
+def Sub_room_price_menu():
+    print("1. Display Room Prices")
+    print("2. Assign Rooms")
+    print("3. Back to main menu")
 
 def clearScreen():
     if platform.system()=="Windows":
@@ -27,7 +46,6 @@ def clearScreen():
     else:
         print("*/ PLATFORM NOT SUPPORTED /*")
 
-
 class Customer:
     """
     Create instance of Customer
@@ -35,14 +53,16 @@ class Customer:
     num_of_customers = 0
 
     def __init__(self):
+        self.customer_id =  random.sample(range(1, 10000), 1)
         self.customer_name = None
         self.customer_address = None
-        self.customer_checkin_date = datetime.today().strptime( %d/%m/%Y)
-        self.customer_checkout_date = datetime.today().strptime(%d/%m/%Y)
+        self.customer_checkin_date = datetime.today().strftime('%d/%m/%Y')
+        self.customer_checkout_date = datetime.today().strftime('%d/%m/%Y')
         Customer.num_of_customers += 1
         self.total_customers = Customer.num_of_customers
 
-    def Set_customer_data(self):
+    def Set_customer_data(self,update=False):
+
         self.customer_name = input("Enter Customer Name=")
         self.customer_address = input("Enter Customer Address=")
         while True :
@@ -61,9 +81,9 @@ class Customer:
             except ValueError:
                 print("Error: must be format dd/mm/yyyy ")
 
-
-        input("Press any key to continue...")
-        clearScreen()
+        if update==False:
+            input("Press any key to continue...")
+            clearScreen()
 
     def Total_num_of_customers(self):
         """
@@ -71,35 +91,31 @@ class Customer:
         """
         print("Total Number Of Customers= "+str(self.total_customers))
 
-    def Get_customer_date(self):
+    def Get_customer_data(self):
+        print("\n************************\n")
+        print("Customer ID="+str(self.customer_id[0]))
         print("Customer Name="+self.customer_name)
         print("Customer Address="+self.customer_address)
-        print("Customer CheckInDate="+self.customer_checkin_date)
-        print("Customer CheckOutDate="+self.customer_checkout_date)
-        input("Press any key to continue...")
-        clearScreen()
+        print("Customer CheckInDate="+str(self.customer_checkin_date))
+        print("Customer CheckOutDate="+str(self.customer_checkout_date))
+        print("\n************************\n")
 
-def Main_menu():
-    print("1. Enter/Display Customer Data")
-    print("2. Enter/Display Room Price")
-    print("3. Enter/Display Restaurant Bill")
-    print("4. Enter/Display Laundry Bill")
-    print("5. Enter/Display Spa Bill")
-    print("6. Display Total Cost")
-    print("7. EXIT")
+    def Get_customer_id(self):
+        return self.customer_id[0]
 
-def Sub_customer_menu():
-    print("1. Enter a Customer Data")
-    print("2. Display Customer Data")
-    print("3. Back to main menu")
+class RoomPrice:
+    def __init__(self):
+        self.RoomCategory=""
+        self.Price=0
+    
 
-Count = 0
+COUNT=0
 def main():
     """
     fuction for main menu
     """
+    CustomerList=[]
 
-    CustomerList = []
     while True:
         Main_menu()
         try:
@@ -121,9 +137,16 @@ def main():
                             global COUNT
                             CustomerList[COUNT].Set_customer_data()
                             COUNT=COUNT+1
+
                         elif(subMenu==2):
                             try:
-                                CustomerObj.Get_customer_date()
+                                if len(CustomerList)!=0:
+                                    for i in range(0,len(CustomerList)):
+                                        CustomerList[i].Get_customer_data()
+                                    input("Press any key to continue...")
+                                    clearScreen()
+                                else:
+                                    raise Exception("Customer Didn't exist yet!")
                             except:
                                 input("Customer Didn't exist yet!")
                                 clearScreen()
@@ -185,21 +208,17 @@ def main():
                             break
                         else:
                             print("Please select a valid choice")
-                        else:
-                            print("Please select a valid choice")
             if (choice == 2):
                 print("Room Price")
             if (choice == 3):
                 print(" Restutant bill")
             if (choice == 4):
-                print(" Laundry bill")
-            if (choice == 5):
                 print(" Spa bill")
-            if (choice == 6):
+            if (choice == 5):
                 print(" Total cost")
-            if (choice == 7):
+            if (choice == 6):
                 quit()
-            if (choice > 7):
+            if (choice > 6):
                 print("Please select a valid choice")
 
 main()
