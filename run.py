@@ -33,9 +33,9 @@ def Sub_customer_menu():
     print("4. Update Customer Data")
     print("5. Back to main menu")
 
-def Sub_room_price_menu():
-    print("1. Display Room Prices")
-    print("2. Assign Rooms")
+def Sub_booking_Display_menu():
+    print("1. Display all Booking Data")
+    print("2. Display Booking Data by BookingID")
     print("3. Back to main menu")
 
 def clearScreen():
@@ -45,6 +45,18 @@ def clearScreen():
         os.system("clear")
     else:
         print("*/ PLATFORM NOT SUPPORTED /*")
+
+
+
+
+class Room:
+    TotalPrice = 0
+    def __init__(self):
+        self.RoomNum= None
+        self.RoomType = None
+        self.NumofGuests = 0
+    
+
 
 class Customer:
     """
@@ -102,12 +114,6 @@ class Customer:
 
     def Get_customer_id(self):
         return self.customer_id[0]
-
-class RoomPrice:
-    def __init__(self):
-        self.RoomCategory=""
-        self.Price=0
-    
 
 COUNT=0
 def main():
