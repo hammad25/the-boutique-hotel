@@ -18,6 +18,16 @@ GSPREAD_CLIENT = gspread.authorize(SCOPED_CREDS)
 SHEET = GSPREAD_CLIENT.open('The-Boutique-Hotel')
 
 
+
+def clearScreen():
+    if platform.system()=="Windows":
+        os.system("cls")
+    elif platform.system()=="Linux" or "Darwin":
+        os.system("clear")
+    else:
+        print("*/ PLATFORM NOT SUPPORTED /*")
+
+
 class Customer:
     """
     Create instance of Customer
@@ -27,33 +37,33 @@ class Customer:
     def __init__(self):
         self.customer_name = None
         self.customer_address = None
-        self.customer_checkin_date = None
-        self.customer_checkout_date = None
+        self.customer_checkin_date = datetime.datetime.strptime("01/01/2000", "%d/%m/%Y")
+        self.customer_checkout_date = datetime.datetime.strptime("01/01/2000", "%d/%m/%Y")
         Customer.num_of_customers += 1
         self.total_customers = Customer.num_of_customers
 
-    def Set_customer_date(self):
+    def Set_customer_data(self):
         self.customer_name = input("Enter Customer Name=")
         self.customer_address = input("Enter Customer Address=")
         while True :
-                checkin_date = input("Enter Customer CheckInDate (%d/%m/%Y) =")
+            self.customer_checkin_date  = input("Enter Customer CheckInDate (day/month/year) =")
             try:
-                self.customer_checkin_date = datetime.datetime.strptime(checkin_date, "%d/%m/%Y")
+                self.customer_checkin_date = datetime.strptime(self.customer_checkin_date , "%d/%m/%Y").strftime("%d/%m/%Y")
                 break
             except ValueError:
                 print("Error: must be format dd/mm/yyyy ")
         while True :
-            checkout_date = input("Enter Customer CheckOutDate  (%d/%m/%Y) =")
+            self.customer_checkout_date = input("Enter Customer CheckOutDate  (day/month/year) =")
             try:
-                self.customer_checkout_date = datetime.datetime.strptime(checkout_date, "%d/%m/%Y")
+                self.customer_checkout_date = datetime.strptime(self.customer_checkout_date, "%d/%m/%Y").strftime("%d/%m/%Y")
+
                 break
             except ValueError:
                 print("Error: must be format dd/mm/yyyy ")
 
 
         input("Press any key to continue...")
-        os.system("cls")
-
+        clearScreen()
 
     def Total_num_of_customers(self):
         """
