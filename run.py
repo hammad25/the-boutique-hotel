@@ -76,16 +76,6 @@ class Customer:
                 break
             except ValueError:
                 print("Error: must be format dd/mm/yyyy ")
-
-        while True :
-            self.customer_age = int(input("Enter Customer age ="))
-            try:
-                if self.customer_age < 18:
-                    print("Customer must be over 18")
-            except ValueError():
-                print("Please enter a number")
-
-
         while True :
             self.customer_checkin_date  = input("Enter Customer CheckInDate (day/month/year) =")
             try:
