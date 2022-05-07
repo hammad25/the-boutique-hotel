@@ -37,8 +37,8 @@ class Customer:
     def __init__(self):
         self.customer_name = None
         self.customer_address = None
-        self.customer_checkin_date = datetime.datetime.strptime("01/01/2000", "%d/%m/%Y")
-        self.customer_checkout_date = datetime.datetime.strptime("01/01/2000", "%d/%m/%Y")
+        self.customer_checkin_date = datetime.today().strptime( %d/%m/%Y)
+        self.customer_checkout_date = datetime.today().strptime(%d/%m/%Y)
         Customer.num_of_customers += 1
         self.total_customers = Customer.num_of_customers
 
@@ -77,7 +77,7 @@ class Customer:
         print("Customer CheckInDate="+self.customer_checkin_date)
         print("Customer CheckOutDate="+self.customer_checkout_date)
         input("Press any key to continue...")
-        os.system("cls")
+        clearScreen()
 
 def Main_menu():
     print("1. Enter/Display Customer Data")
@@ -104,7 +104,7 @@ def main():
         except ValueError:
             print("Please enter a number")
         else:
-            os.system("cls")
+            clearScreen()
             while True:
                 if (choice == 1):
                     Sub_customer_menu()
@@ -121,13 +121,65 @@ def main():
                                 CustomerObj.Get_customer_date()
                             except:
                                 input("Customer Didn't exist yet!")
-                                os.system("cls")
+                                clearScreen()
                                 Sub_customer_menu()
-                                os.system("cls")
+                                clearScreen()
                         elif(subMenu==3):
-                            os.system("cls")
-                            # Main_menu()
+                            # Delete a Customer
+                            flag=False
+                            CustomerID=input("\nEnter Customer Id = ")
+                            try:
+                                if len(CustomerList)!=0:
+                                    for i in range(0,len(CustomerList)):
+                                        if CustomerID != None and CustomerID == str(CustomerList[i].Get_customer_id()):
+                                            del CustomerList[i]
+                                        else:
+                                            flag=True
+                                else:
+                                    raise Exception("Customer Didn't exist yet!")
+                                if flag==True:
+                                    raise Exception("Customer with this id not exist!")
+                                else:
+                                    input(" Deleted Successfully! ")
+                                    clearScreen()
+                                    Sub_customer_menu()
+                                    clearScreen()
+                            except:
+                                input("Customer with this id not exist!!")
+                                clearScreen()
+                                Sub_customer_menu()
+                                clearScreen()
+                        elif(subMenu==4):
+                            # Update a Customer
+                            flag=False
+                            CustomerID=input("\nEnter Customer Id = ")
+                            try:
+                                if len(CustomerList)!=0:
+                                    for i in range(0,len(CustomerList)):
+                                        if CustomerID != None and CustomerID == str(CustomerList[i].Get_customer_id()):
+                                            CustomerList[i].Set_customer_data(True)
+                                            break
+                                        else:
+                                            flag=True
+                                else:
+                                    raise Exception("Customer Didn't exist yet!")
+                                if flag==True:
+                                    raise Exception("Customer with this id not exist!")
+                                else:
+                                    input(" Updated Successfully! ")
+                                    clearScreen()
+                                    Sub_customer_menu()
+                                    clearScreen()
+                            except:
+                                input("Customer with this id not exist!!")
+                                clearScreen()
+                                Sub_customer_menu()
+                                clearScreen()
+                        elif(subMenu==5):
+                            clearScreen()
                             break
+                        else:
+                            print("Please select a valid choice")
                         else:
                             print("Please select a valid choice")
             if (choice == 2):
