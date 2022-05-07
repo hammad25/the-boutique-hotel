@@ -20,11 +20,8 @@ SHEET = GSPREAD_CLIENT.open('The-Boutique-Hotel')
 
 def Main_menu():
     print("1. Enter/Manage Customer Data")
-    print("2. Enter/Manage Room Price")
-    print("3. Enter/Manage Restaurant Bill")
-    print("4. Enter/Manage Spa Bill")
-    print("5. Display Total Cost")
-    print("6. EXIT")
+    print("2. Display Booking Data")
+    print("3. EXIT")
 
 def Sub_customer_menu():
     print("1. Enter a Customer Data")
@@ -45,8 +42,6 @@ def clearScreen():
         os.system("clear")
     else:
         print("*/ PLATFORM NOT SUPPORTED /*")
-
-
 
 
 class Room:
