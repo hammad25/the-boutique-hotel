@@ -49,9 +49,6 @@ class Customer:
         print("Customer CheckInDate="+self.customer_checkin_date)
         print("Customer CheckOutDate="+self.customer_checkout_date)
 
-
-
-
 def Main_menu():
     """
     Management system home page
@@ -63,14 +60,46 @@ def Main_menu():
     print("3. Display Total Cost")
     print("4. EXIT")
 
+def Sub_customer_menu():
+    print("1. Enter a Customer Data")
+    print("2. Display Customer Data")
+    print("3. Back to main menu")
+
+
 def main():
     """
     Function when main menu option selected
     """
     while True:
         Main_menu()
-        if (choice ==1 ):
-            print("Customer")
+        try:
+            choice = input("Enter your choice = ")
+        except ValueError():
+            print("Please Enter a number")
+        else:
+            os.system("cls")
+            if (choice == 1 ):
+                Sub_customer_menu()
+                try:
+                    subMenu =. input("Enter your choice = ")
+                except ValueError():
+                    print("Please Enter a number")
+                else:
+                    if (subMenu == 1):
+                        CustomerObj = Customer()
+                        CustomerObj.Set_customer_date()
+                    elif (SubMenu == 2 ):
+                        try:
+                            CustomerObj.Get_customer_data()
+                        except:
+                            input("Customer Didn't exist yet!")
+                            os.system("cls")
+                            Sub_customer_menu()
+                    elif(subMenu==3):
+                        os.system("cls")
+                        Main_menu()
+                    else:
+                        print("Please select a valid choice")
         if (choice == 2):
             print("Room Price")
         if (choice == 3):
