@@ -85,6 +85,32 @@ class Customer:
         self.NumOfNight=datetime.strptime(self.customer_checkout_date,"%d/%m/%Y").date()-datetime.strptime(self.customer_checkin_date,"%d/%m/%Y").date()
         self.NumofNights = self.NumofNights.days
 
+        while True:
+                choice = int(input("Select Room Type (Enter 1 for Standard or 2 for Deluxe) = "))
+                try:
+                    if(choice==1):
+                        self.RoomType="standard"
+                        break
+                    elif(choice==2):
+                        self.RoomType="deluxe"
+                        break
+                    else:
+                        print("\n please choice valid option!")
+                except ValueError:
+                    print("Please enter a number!")
+        while(True):
+            try:
+                self.NumOfGuests=int(input("Enter Number of Guests (1-3)"))
+                if(self.NumOfGuests>=1 and self.NumOfGuests<=3):
+                    break
+                else:
+                    print("Guests must be between 1 to 3")
+            except ValueError:
+                print("Please enter a number!")
+        if update==False:
+            input("Press any key to continue...")
+            clearScreen()
+
         if update==False:
             input("Press any key to continue...")
             clearScreen()
