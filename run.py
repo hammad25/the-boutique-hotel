@@ -23,7 +23,8 @@ def Main_menu():
     print("2. Display Booking Data")
     print("3. EXIT")
 
-def Sub_customer_menu():
+def Sub_booking_menu():
+    print(" Standard Room Price --> £200 AND Deluxe Room Price --> £400")
     print("1. Enter a Customer")
     print("2. Display Customer")
     print("3. Delete Customer")
@@ -69,6 +70,14 @@ class Customer:
         self.customer_name = input("Enter Customer Name=")
         self.customer_address = input("Enter Customer Address=")
         while True :
+            self.customer_age  = input("Enter Customer Age (day/month/year) =")
+            try:
+                self.customer_age = datetime.strptime(self.customer_age , "%d/%m/%Y").strftime("%d/%m/%Y")
+                break
+            except ValueError:
+                print("Error: must be format dd/mm/yyyy ")
+
+        while True :
             self.customer_age = int(input("Enter Customer age ="))
             try:
                 if self.customer_age < 18:
@@ -77,10 +86,6 @@ class Customer:
                 print("Please enter a number")
 
 
-                self.customer_checkin_date = datetime.strptime(self.customer_checkin_date , "%d/%m/%Y").strftime("%d/%m/%Y")
-                break
-            except ValueError:
-                print("Error: must be format dd/mm/yyyy ")
         while True :
             self.customer_checkin_date  = input("Enter Customer CheckInDate (day/month/year) =")
             try:
@@ -150,7 +155,7 @@ class Customer:
         print("Room Type = " +self.RoomType)
         print("Customer CheckInDate="+str(self.customer_checkin_date))
         print("Customer CheckOutDate="+str(self.customer_checkout_date))
-        print("Total Price="+str(Total_price_Calculation())
+        print("Total Price="+str(self.Total_price_Calculation())
         print("\n************************\n")
 
     def Get_customer_id(self):
@@ -173,11 +178,8 @@ def main():
             clearScreen()
             while True:
                 if (choice == 1):
-                    Sub_customer_menu()
-                    try:
-                        subMenu=int(input(("Enter your choice =")))
-                    except ValueError:
-                        print("Please enter a number")
+                    Sub_booking_menu()
+                    
                     else:
                         if(subMenu==1):
                             CustomerList.append(Customer())
@@ -197,7 +199,7 @@ def main():
                             except:
                                 input("Customer Didn't exist yet!")
                                 clearScreen()
-                                Sub_customer_menu()
+                                Sub_booking_menu()
                                 clearScreen()
                         elif(subMenu==3):
                             # Delete a Customer
@@ -217,12 +219,12 @@ def main():
                                 else:
                                     input(" Deleted Successfully! ")
                                     clearScreen()
-                                    Sub_customer_menu()
+                                    Sub_booking_menu()
                                     clearScreen()
                             except:
                                 input("Customer with this id not exist!!")
                                 clearScreen()
-                                Sub_customer_menu()
+                                Sub_booking_menu()
                                 clearScreen()
                         elif(subMenu==4):
                             # Update a Customer
@@ -243,20 +245,65 @@ def main():
                                 else:
                                     input(" Updated Successfully! ")
                                     clearScreen()
-                                    Sub_customer_menu()
+                                    Sub_booking_menu()
                                     clearScreen()
                             except:
                                 input("Customer with this id not exist!!")
                                 clearScreen()
-                                Sub_customer_menu()
+                                Sub_booking_menu()
                                 clearScreen()
                         elif(subMenu==5):
                             clearScreen()
                             break
                         else:
                             print("Please select a valid choice")
-            if (choice == 2):
-                print("Room Price")
+                if (choice == 2):
+                    clearScreen()
+                    Sub_booking_Display_menu():
+                    try:
+                        subMenu=int(input(("Enter your choice =")))
+                    except ValueError:
+                        print("Please enter a number")
+                    else :
+                        if (subMenu == 1 ):
+                            try:
+                                if len(CustomerList)!=0:
+                                    for i in range(0,len(CustomerList)):
+                                        CustomerList[i].Get_customer_data()
+                                    input("Press any key to continue...")
+                                    clearScreen()
+                                else:
+                                    raise Exception("Customer Didn't exist yet!")
+                            except:
+                                input("Customer Didn't exist yet!")
+                                clearScreen()
+                                Sub_booking_menu()
+                                clearScreen()
+                        elif(subMenu==2):
+                            flag=False
+                            CustomerID=input("\nEnter Customer Id = ")
+                            try:
+                                if len(CustomerList)!=0:
+                                    for i in range(0,len(CustomerList)):
+                                        if CustomerID != None and CustomerID == str(CustomerList[i].Get_customer_id()):
+                                            CustomerList[i].Get_customer_data()
+                                        else:
+                                            flag=True
+                                else:
+                                    raise Exception("Customer Didn't exist yet!")
+                                if flag==True:
+                                    raise Exception("Customer with this id not exist!")
+                                else:
+                                    input(" Displayed Successfully! ")
+                                    clearScreen()
+                                    Sub_booking_menu()
+                                    clearScreen()
+                            except:
+                                input("Customer with this id not exist!!")
+                                clearScreen()
+                                Sub_booking_menu()
+                                clearScreen()
+                            
             if (choice == 3):
                 quit()
             if (choice > 3):
