@@ -17,23 +17,22 @@ SCOPED_CREDS = CREDS.with_scopes(SCOPE)
 GSPREAD_CLIENT = gspread.authorize(SCOPED_CREDS)
 SHEET = GSPREAD_CLIENT.open('The-Boutique-Hotel')
 
-
 def Main_menu():
-    print("1. Enter/Manage Customer Data")
+    print("1. Enter/Manage Booking")
     print("2. Display Booking Data")
     print("3. EXIT")
 
 def Sub_booking_menu():
     print(" Standard Room Price --> £200 AND Deluxe Room Price --> £400")
-    print("1. Enter a Customer")
-    print("2. Display Customer")
-    print("3. Delete Customer")
-    print("4. Update Customer")
+    print("1. Enter a Booking")
+    print("2. Display Booking")
+    print("3. Delete Booking")
+    print("4. Update Booking")
     print("5. Back to main menu")
 
 def Sub_booking_Display_menu():
     print("1. Display all Booking Data")
-    print("2. Display Booking Data by Booking ID")
+    print("2. Display Booking Data by BookingID")
     print("3. Back to main menu")
 
 def clearScreen():
@@ -52,23 +51,31 @@ class Customer:
     num_of_customers = 0
 
     def __init__(self):
-        self.customer_id =  random.sample(range(1, 10000), 1)
+        self.customer_id = random.sample(range(1, 10000), 1)
         self.customer_name = None
         self.customer_age = None
-        self.customer_address = None
+        self.customer_telephone = None
         self.customer_checkin_date = datetime.today().strftime('%d/%m/%Y')
         self.customer_checkout_date = datetime.today().strftime('%d/%m/%Y')
         Customer.num_of_customers += 1
         self.total_customers = Customer.num_of_customers
-        self.RoomType = None
-        self.NumofGuests = 0
-        self.NumofNights = 0
-        self.TotalPrice = 0
+        self.RoomType=None
+        self.NumOfGuests=0
+        self.NumOfNight=0
+        self.TotalPrice=0
 
     def Set_customer_data(self,update=False):
 
         self.customer_name = input("Enter Customer Name=")
-        self.customer_address = input("Enter Customer Address=")
+        
+        while True:
+            self.customer_telephone = str(input("Enter Customer Telephone="))
+            try:
+                if(len(self.customer_telephone) == 11 and self.customer_telephone.isnumeric()):
+                    break
+            except ValueError():
+                print("please enter a valid 11 digit number")
+
         while True :
             self.customer_age  = input("Enter Customer Age (day/month/year) =")
             try:
@@ -87,13 +94,12 @@ class Customer:
             self.customer_checkout_date = input("Enter Customer CheckOutDate  (day/month/year) =")
             try:
                 self.customer_checkout_date = datetime.strptime(self.customer_checkout_date, "%d/%m/%Y").strftime("%d/%m/%Y")
+
                 break
             except ValueError:
                 print("Error: must be format dd/mm/yyyy ")
-        
         self.NumOfNight=datetime.strptime(self.customer_checkout_date,"%d/%m/%Y").date()-datetime.strptime(self.customer_checkin_date,"%d/%m/%Y").date()
-        self.NumofNights = self.NumofNights.days
-
+        self.NumOfNight=self.NumOfNight.days
         while True:
                 choice = int(input("Select Room Type (Enter 1 for Standard or 2 for Deluxe) = "))
                 try:
@@ -116,7 +122,6 @@ class Customer:
                     print("Guests must be between 1 to 3")
             except ValueError:
                 print("Please enter a number!")
-
         if update==False:
             input("Press any key to continue...")
             clearScreen()
@@ -127,29 +132,29 @@ class Customer:
         """
         print("Total Number Of Customers= "+str(self.total_customers))
 
-    def Total_price_Calculation(self):
-        if(self.RoomType == "standard"):
-            self.TotalPrice = int(self.NumOfNight) * self.NumofGuests * 200
-        elif(self.RoomType == "deluxe"):
-            self.TotalPrice = int(self.NumOfNight) * 400 * self.NumOfGuests
+    def calculations(self):
+        if(self.RoomType=="standard"):
+            self.TotalPrice=int(self.NumOfNight)*200*self.NumOfGuests
+        elif(self.RoomType=="deluxe"):
+            self.TotalPrice=int(self.NumOfNight)*400*self.NumOfGuests
         return self.TotalPrice
-        
-
 
     def Get_customer_data(self):
         print("\n************************\n")
         print("Customer ID="+str(self.customer_id[0]))
         print("Customer Name="+self.customer_name)
-        print("Customer Age="+self.customer_age)
-        print("Customer Address="+self.customer_address)
-        print("Room Type = " +self.RoomType)
+        print("Customer Age="+str(self.customer_age))
+        print("Customer telephone="+self.customer_telephone)
+        print("Room Type="+self.RoomType)
         print("Customer CheckInDate="+str(self.customer_checkin_date))
         print("Customer CheckOutDate="+str(self.customer_checkout_date))
-        print("Total Price="+str(self.Total_price_Calculation()))
+        print("Total Price="+str(self.calculations())+"£")
         print("\n************************\n")
+
 
     def Get_customer_id(self):
         return self.customer_id[0]
+
 
 COUNT=0
 def main():
@@ -298,10 +303,10 @@ def main():
                                 clearScreen()
                         elif(subMenu==3):
                             clearScreen()
-                            Main_menu()
-            if (choice == 3):
-                quit()
-            if (choice > 3):
-                print("Please select a valid choice")
+                            break
+                if (choice == 3):
+                    quit()
+                if (choice > 3):
+                    print("Please select a valid choice")
 
 main()
