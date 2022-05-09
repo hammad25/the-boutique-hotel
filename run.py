@@ -18,11 +18,17 @@ GSPREAD_CLIENT = gspread.authorize(SCOPED_CREDS)
 SHEET = GSPREAD_CLIENT.open('The-Boutique-Hotel')
 
 def Main_menu():
+    """
+    Function to display booking systems main menu
+    """
     print("1. Enter/Manage Booking")
     print("2. Display Booking Data")
     print("3. EXIT")
 
 def Sub_booking_menu():
+    """
+    Function to display booking options when choose 1 in Main_menu()
+    """
     print(" Standard Room Price --> £200 AND Deluxe Room Price --> £400")
     print("1. Enter a Booking")
     print("2. Display Booking")
@@ -31,11 +37,17 @@ def Sub_booking_menu():
     print("5. Back to main menu")
 
 def Sub_booking_Display_menu():
+    """
+    Function to display booking options when choose 2 in Main_menu()
+    """
     print("1. Display all Booking Data")
     print("2. Display Booking Data by BookingID")
     print("3. Back to main menu")
 
 def clearScreen():
+    """
+    Function to clear screen in Windows or Mac operating system
+    """
     if platform.system()=="Windows":
         os.system("cls")
     elif platform.system()=="Linux" or "Darwin":
@@ -65,16 +77,21 @@ class Customer:
         self.TotalPrice=0
 
     def Set_customer_data(self,update=False):
+        """
+        Function to enter customer data
+        """
 
         self.customer_name = input("Enter Customer Name=")
         
         while True:
-            self.customer_telephone = str(input("Enter Customer Telephone="))
+            self.customer_telephone = (input("Enter Customer Telephone="))
             try:
                 if(len(self.customer_telephone) == 11 and self.customer_telephone.isnumeric()):
                     break
+                else:
+                    print("please enter a 11 digit number")
             except ValueError():
-                print("please enter a valid 11 digit number")
+                print("please enter a number")
 
         while True :
             self.customer_age  = input("Enter Customer Age (day/month/year) =")
@@ -133,6 +150,9 @@ class Customer:
         print("Total Number Of Customers= "+str(self.total_customers))
 
     def calculations(self):
+        """"
+        Function to calculate room price
+        """
         if(self.RoomType=="standard"):
             self.TotalPrice=int(self.NumOfNight)*200*self.NumOfGuests
         elif(self.RoomType=="deluxe"):
@@ -140,6 +160,9 @@ class Customer:
         return self.TotalPrice
 
     def Get_customer_data(self):
+        """
+        Function to display customer data
+        """
         print("\n************************\n")
         print("Customer ID="+str(self.customer_id[0]))
         print("Customer Name="+self.customer_name)
