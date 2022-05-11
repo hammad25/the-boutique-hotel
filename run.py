@@ -18,6 +18,7 @@ GSPREAD_CLIENT = gspread.authorize(SCOPED_CREDS)
 SHEET = GSPREAD_CLIENT.open('The-Boutique-Hotel')
 
 
+
 def Main_menu():
     """
     Function to display booking systems main menu
@@ -84,7 +85,7 @@ class Customer:
 
     def Set_customer_data(self, update=False):
         """
-        Function to enter customer data
+        Function to enter customer data in a While loop with validations until valid data is entered otherwise raise error
         """
 
         self.customer_name = input("Enter Customer Name=")
@@ -190,6 +191,7 @@ def main():
     """
     fuction for main menu
     """
+
     CustomerList = []
 
     while True:
@@ -213,6 +215,7 @@ def main():
                             global COUNT
                             CustomerList[COUNT].Set_customer_data()
                             COUNT = COUNT+1
+                            update_booking_worksheet()
 
                         elif(subMenu == 2):
                             try:
@@ -337,5 +340,24 @@ def main():
                     quit()
                 if (choice > 3):
                     print("Please select a valid choice")
+    
+    return CustomerList
+
 
 main()
+
+
+
+def update_booking_worksheet(data):
+    print("updating bookings worksheet")
+    bookings_worksheet = SHEET.worksheet("bookings")
+    bookings_worksheet.append_row(data)
+    print("\n Bookings workssheet updates successfully \n")
+
+
+data = main()
+bookings_data = [int(num) for num in data]
+update_booking_worksheet(bookings_data)
+
+
+
