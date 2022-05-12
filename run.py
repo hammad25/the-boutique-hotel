@@ -1,10 +1,11 @@
-import gspread
-from google.oauth2.service_account import Credentials
 import os
 import platform
 import random
-from datetime import datetime
 import sys
+from datetime import datetime
+
+import gspread
+from google.oauth2.service_account import Credentials
 
 SCOPE = [
     "https://www.googleapis.com/auth/spreadsheets",
@@ -82,6 +83,8 @@ class Customer:
         self.NumOfGuests = 0
         self.NumOfNight = 0
         self.TotalPrice = 0
+        self.standardRoomPrice=200
+        self.deluxeRoomPrice=400
 
     def Set_customer_data(self, update=False):
         """
@@ -89,7 +92,7 @@ class Customer:
         """
 
         self.customer_name = input("Enter Customer Name=")
-        
+
         while True:
             self.customer_telephone = (input("Enter Customer Telephone="))
             try:
@@ -161,9 +164,10 @@ class Customer:
         Function to calculate room price
         """
         if(self.RoomType == "standard"):
-            self.TotalPrice = int(self.NumOfNight)*200*self.NumOfGuests
+            self.TotalPrice = int(self.NumOfNight)*self.standardRoomPrice*self.NumOfGuests
         elif(self.RoomType == "deluxe"):
-            self.TotalPrice = int(self.NumOfNight)*400*self.NumOfGuests
+            self.TotalPrice = int(self.NumOfNight)*self.deluxeRoomPrice*self.NumOfGuests
+        self.TotalPrice=self.TotalPrice
         return self.TotalPrice
 
     def Get_customer_data(self):
@@ -180,6 +184,25 @@ class Customer:
         print("Customer CheckOutDate="+str(self.customer_checkout_date))
         print("Total Price="+str(self.calculations())+"£")
         print("\n************************\n")
+
+    def make_booking_list(self):
+        data  = []
+        data.append(self.customer_id[0])
+        data.append(self.customer_name)
+        data.append(self.customer_age)
+        data.append(self.customer_telephone)
+        data.append(str(self.customer_checkin_date))
+        data.append(str(self.customer_checkout_date))
+        data.append(self.RoomType)
+        if(self.RoomType == "standard"):
+            data.append(self.standardRoomPrice)
+        elif(self.RoomType == "deluxe"):
+            data.append(self.deluxeRoomPrice)
+        data.append(self.NumOfGuests)
+        data.append(self.NumOfNight)
+        data.append(self.calculations())
+
+        return data
 
 
     def Get_customer_id(self):
@@ -214,8 +237,8 @@ def main():
                             CustomerList.append(Customer())
                             global COUNT
                             CustomerList[COUNT].Set_customer_data()
+                            update_booking_worksheet(CustomerList[COUNT].make_booking_list())
                             COUNT = COUNT+1
-                            update_booking_worksheet()
 
                         elif(subMenu == 2):
                             try:
@@ -340,24 +363,16 @@ def main():
                     quit()
                 if (choice > 3):
                     print("Please select a valid choice")
-    
+
     return CustomerList
-
-
-main()
-
 
 
 def update_booking_worksheet(data):
     print("updating bookings worksheet")
+    print(data)
     bookings_worksheet = SHEET.worksheet("bookings")
     bookings_worksheet.append_row(data)
     print("\n Bookings workssheet updates successfully \n")
 
 
-data = main()
-bookings_data = [int(num) for num in data]
-update_booking_worksheet(bookings_data)
-
-
-
+main()
