@@ -1,7 +1,6 @@
 import os
 import platform
 import random
-import sys
 from datetime import datetime
 
 import gspread
@@ -17,7 +16,6 @@ CREDS = Credentials.from_service_account_file('creds.json')
 SCOPED_CREDS = CREDS.with_scopes(SCOPE)
 GSPREAD_CLIENT = gspread.authorize(SCOPED_CREDS)
 SHEET = GSPREAD_CLIENT.open('The-Boutique-Hotel')
-
 
 
 def Main_menu():
@@ -38,9 +36,9 @@ def Sub_booking_menu():
     print(" Standard Room Price --> £200 AND Deluxe Room Price --> £400")
     print("1. Enter a Booking")
     print("2. Display Booking")
-    print("3. Delete Booking")
-    print("4. Update Booking")
-    print("5. Back to main menu")
+    # print("3. Delete Booking")
+    # print("4. Update Booking")
+    print("3. Back to main menu")
 
 
 def Sub_booking_Display_menu():
@@ -88,7 +86,8 @@ class Customer:
 
     def Set_customer_data(self, update=False):
         """
-        Function to enter customer data in a While loop with validations until valid data is entered otherwise raise error
+        Function to enter customer data in a While loop with validations 
+        until valid data is entered otherwise raise error
         """
 
         self.customer_name = input("Enter Customer Name=")
@@ -208,6 +207,62 @@ class Customer:
     def Get_customer_id(self):
         return self.customer_id[0]
 
+def menu1_display_booking():
+    try:
+        if len(CustomerList) != 0:
+            for i in range(0, len(CustomerList)):
+                CustomerList[i].Get_customer_data()
+                input("Press any key to continue...")
+                clearScreen()
+        else:
+            raise Exception("Customer doesnt exist yet!")
+    except:
+        input("Customer does not exist yet!")
+        clearScreen()
+        Sub_booking_menu()                                
+        clearScreen()
+
+
+def menu2_display_booking_data():
+    try:
+        if len(CustomerList) != 0:
+            for i in range(0, len(CustomerList)):
+                CustomerList[i].Get_customer_data()
+                input("Press any key to continue...")
+                clearScreen()
+        else:
+            raise Exception("Customer does not exist yet!")
+    except:
+        input("Customer does not exist yet!")
+        clearScreen()
+        Sub_booking_menu()
+        clearScreen()
+
+
+def menu2_display_bookingby_ID():
+    flag = False
+    CustomerID = input("\nEnter Customer Id = ")
+    try:
+        if len(CustomerList) != 0:
+            for i in range(0, len(CustomerList)):
+                if CustomerID != None and CustomerID == str(CustomerList[i].Get_customer_id()):
+                    CustomerList[i].Get_customer_data()
+                else:
+                    flag = True
+        else:
+            raise Exception("Customer does not exist yet!")
+        if flag == True:
+            raise Exception("Customer with this ID does not exist!")
+        else:
+            input(" Displayed Successfully! ")
+            clearScreen()
+            Sub_booking_menu()
+            clearScreen()
+    except:
+        input("Customer with this ID does not exist!!")
+        clearScreen()
+        Sub_booking_menu()
+        clearScreen()
 
 COUNT = 0
 def main():
@@ -241,71 +296,59 @@ def main():
                             COUNT = COUNT+1
 
                         elif(subMenu == 2):
-                            try:
-                                if len(CustomerList) != 0:
-                                    for i in range(0, len(CustomerList)):
-                                        CustomerList[i].Get_customer_data()
-                                    input("Press any key to continue...")
-                                    clearScreen()
-                                else:
-                                    raise Exception("Customer doesnt exist yet!")
-                            except:
-                                input("Customer does not exist yet!")
-                                clearScreen()
-                                Sub_booking_menu()
-                                clearScreen()
-                        elif(subMenu == 3):
-                            # Delete a Customer
-                            flag = False
-                            CustomerID = input("\nEnter Customer Id = ")
-                            try:
-                                if len(CustomerList) != 0:
-                                    for i in range(0, len(CustomerList)):
-                                        if CustomerID != None and CustomerID == str(CustomerList[i].Get_customer_id()):
-                                            del CustomerList[i]
-                                        else:
-                                            flag = True
-                                else:
-                                    raise Exception("Customer does not exist yet!")
-                                if flag == True:
-                                    raise Exception("Customer with this ID does not exist!")
-                                else:
-                                    input(" Deleted Successfully! ")
-                                    clearScreen()
-                                    Sub_booking_menu()
-                                    clearScreen()
-                            except:
-                                input("Customer with this ID does not exist!!")
-                                clearScreen()
-                                Sub_booking_menu()
-                                clearScreen()
-                        elif(subMenu == 4):
+                            menu1_display_booking()
+                        # elif(subMenu == 3):
+                        #     # Delete a Customer
+                        #     flag = False
+                        #     CustomerID = input("\nEnter Customer Id = ")
+                        #     try:
+                        #         if len(CustomerList) != 0:
+                        #             for i in range(0, len(CustomerList)):
+                        #                 if CustomerID != None and CustomerID == str(CustomerList[i].Get_customer_id()):
+                        #                     del CustomerList[i]
+                        #                 else:
+                        #                     flag = True
+                        #         else:
+                        #             raise Exception("Customer does not exist yet!")
+                        #         if flag == True:
+                        #             raise Exception("Customer with this ID does not exist!")
+                        #         else:
+                        #             input(" Deleted Successfully! ")
+                        #             clearScreen()
+                        #             Sub_booking_menu()
+                        #             clearScreen()
+                        #     except:
+                        #         input("Customer with this ID does not exist!!")
+                        #         clearScreen()
+                        #         Sub_booking_menu()
+                        #         clearScreen()
+                        # elif(subMenu == 4):
                             # Update a Customer
-                            flag = False
-                            CustomerID = input("\nEnter Customer Id = ")
-                            try:
-                                if len(CustomerList) != 0:
-                                    for i in range(0, len(CustomerList)):
-                                        if CustomerID != None and CustomerID == str(CustomerList[i].Get_customer_id()):
-                                            CustomerList[i].Set_customer_data(True)
-                                            break
-                                        else:
-                                            flag = True
-                                else:
-                                    raise Exception("Customer does not exist yet!")
-                                if flag == True:
-                                    raise Exception("Customer with this ID does not exist!")
-                                else:
-                                    input(" Updated Successfully! ")
-                                    clearScreen()
-                                    Sub_booking_menu()
-                                    clearScreen()
-                            except:
-                                input("Customer with this ID does not exist!!")
-                                clearScreen()
-                                Sub_booking_menu()
-                                clearScreen()
-                        elif(subMenu == 5):
+                            # flag = False
+                            # CustomerID = input("\nEnter Customer Id = ")
+                            # try:
+                            #     if len(CustomerList) != 0:
+                            #         for i in range(0, len(CustomerList)):
+                            #             if CustomerID != None and CustomerID == str(CustomerList[i].Get_customer_id()):
+                            #                 CustomerList[i].Set_customer_data(True)
+                            #                 break
+                            #             else:
+                            #                 flag = True
+                            #     else:
+                            #         raise Exception("Customer does not exist yet!")
+                            #     if flag == True:
+                            #         raise Exception("Customer with this ID does not exist!")
+                            #     else:
+                            #         input(" Updated Successfully! ")
+                            #         clearScreen()
+                            #         Sub_booking_menu()
+                            #         clearScreen()
+                            # except:
+                            #     input("Customer with this ID does not exist!!")
+                            #     clearScreen()
+                            #     Sub_booking_menu()
+                            #     clearScreen()
+                        elif(subMenu == 3):
                             clearScreen()
                             break
                         else:
@@ -319,43 +362,12 @@ def main():
                         print("Please enter a number")
                     else:
                         if(subMenu == 1):
-                            try:
-                                if len(CustomerList) != 0:
-                                    for i in range(0, len(CustomerList)):
-                                        CustomerList[i].Get_customer_data()
-                                    input("Press any key to continue...")
-                                    clearScreen()
-                                else:
-                                    raise Exception("Customer does not exist yet!")
-                            except:
-                                input("Customer does not exist yet!")
-                                clearScreen()
-                                Sub_booking_menu()
-                                clearScreen()
+                            # menu2_display_booking_data()
+                            display_bookings()
                         elif(subMenu == 2):
-                            flag = False
-                            CustomerID = input("\nEnter Customer Id = ")
-                            try:
-                                if len(CustomerList) != 0:
-                                    for i in range(0, len(CustomerList)):
-                                        if CustomerID != None and CustomerID == str(CustomerList[i].Get_customer_id()):
-                                            CustomerList[i].Get_customer_data()
-                                        else:
-                                            flag = True
-                                else:
-                                    raise Exception("Customer does not exist yet!")
-                                if flag == True:
-                                    raise Exception("Customer with this ID does not exist!")
-                                else:
-                                    input(" Displayed Successfully! ")
-                                    clearScreen()
-                                    Sub_booking_menu()
-                                    clearScreen()
-                            except:
-                                input("Customer with this ID does not exist!!")
-                                clearScreen()
-                                Sub_booking_menu()
-                                clearScreen()
+                            menu2_display_bookingby_ID()
+
+
                         elif(subMenu == 3):
                             clearScreen()
                             break
@@ -369,10 +381,23 @@ def main():
 
 def update_booking_worksheet(data):
     print("updating bookings worksheet")
-    print(data)
+    print(data.split())
     bookings_worksheet = SHEET.worksheet("bookings")
     bookings_worksheet.append_row(data)
     print("\n Bookings workssheet updates successfully \n")
+
+def display_bookings():
+    bookings_worksheet_data = SHEET.worksheet("bookings")
+    bookings_worksheet_data=bookings_worksheet_data.get_all_values()
+    bookings_worksheet_data=bookings_worksheet_data[1:]
+    for item in bookings_worksheet_data:
+        print(item[0]+"  "+item[1]+"  "+item[2]+"  "+item[3]+"  "+item[4]+"  "+item[5]+"  "+item[6]+"  "+item[7]+"  "+item[8]+"  "+item[9]+"  "+item[10])
+    
+    input("\nPress any key to continue...\n")
+
+
+
+
 
 
 main()
