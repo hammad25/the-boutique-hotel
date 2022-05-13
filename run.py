@@ -292,7 +292,7 @@ def main():
                             CustomerList.append(Customer())
                             global COUNT
                             CustomerList[COUNT].Set_customer_data()
-                            update_booking_worksheet(CustomerList[COUNT].make_booking_list())
+                            create_booking_worksheet(CustomerList[COUNT].make_booking_list())
                             COUNT = COUNT+1
 
                         elif(subMenu == 2):
@@ -363,11 +363,11 @@ def main():
                     else:
                         if(subMenu == 1):
                             # menu2_display_booking_data()
-                            display_bookings()
+                            display_all_bookings()
                         elif(subMenu == 2):
-                            menu2_display_bookingby_ID()
-
-
+                            # menu2_display_bookingby_ID()
+                            display_by_booking_ID()
+                            break
                         elif(subMenu == 3):
                             clearScreen()
                             break
@@ -379,24 +379,35 @@ def main():
     return CustomerList
 
 
-def update_booking_worksheet(data):
+def create_booking_worksheet(data):
     print("updating bookings worksheet")
     print(data.split())
     bookings_worksheet = SHEET.worksheet("bookings")
     bookings_worksheet.append_row(data)
     print("\n Bookings workssheet updates successfully \n")
 
-def display_bookings():
+def display_all_bookings():
     bookings_worksheet_data = SHEET.worksheet("bookings")
-    bookings_worksheet_data=bookings_worksheet_data.get_all_values()
-    bookings_worksheet_data=bookings_worksheet_data[1:]
+    bookings_worksheet_data = bookings_worksheet_data.get_all_values()
+    bookings_worksheet_data = bookings_worksheet_data[1:]
     for item in bookings_worksheet_data:
         print(item[0]+"  "+item[1]+"  "+item[2]+"  "+item[3]+"  "+item[4]+"  "+item[5]+"  "+item[6]+"  "+item[7]+"  "+item[8]+"  "+item[9]+"  "+item[10])
     
     input("\nPress any key to continue...\n")
 
-
-
+def display_by_booking_ID():
+    bookings_worksheet_data = SHEET.worksheet("bookings")
+    bookings_worksheet_data = bookings_worksheet_data.get_all_values()
+    bookings_worksheet_data = bookings_worksheet_data[1:]
+    Found = False
+    id = input("Enter an ID = ")
+    for item in bookings_worksheet_data:
+        if (id == item[0]):
+            print("\n"+item[0]+" "+item[1]+" "+item[2]+" "+item[3]+" "+item[4]+" "+item[5]+" "+item[6]+" "+item[7]+" "+item[9]+" "+item[9]+" "+item[10]+"\n")
+            Found = True
+            break
+    if not Found:
+        print("Customer with this Id not exist!")
 
 
 
