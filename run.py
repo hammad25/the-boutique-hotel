@@ -90,10 +90,10 @@ class Customer:
         until valid data is entered otherwise raise error
         """
 
-        self.customer_name = input("Enter Customer Name = ")
+        self.customer_name = input("Enter Customer Name = \n")
 
         while True:
-            self.customer_telephone = (input("Enter Customer Telephone = "))
+            self.customer_telephone = (input("Enter Customer Telephone = \n"))
             try:
                 if(len(self.customer_telephone) == 11 and self.customer_telephone.isnumeric()):
                     break
@@ -103,21 +103,21 @@ class Customer:
                 print("please enter a number")
 
         while True:
-            self.customer_age = input("Enter Customer Age (day/month/year) =")
+            self.customer_age = input("Enter Customer Age (day/month/year) = \n")
             try:
                 self.customer_age = datetime.strptime(self.customer_age, "%d/%m/%Y").strftime("%d/%m/%Y")
                 break
             except ValueError:
                 print("Error: must be format dd/mm/yyyy ")
         while True:
-            self.customer_checkin_date = input("Enter Customer CheckInDate (day/month/year) = ")
+            self.customer_checkin_date = input("Enter Customer CheckInDate (day/month/year) = \n")
             try:
                 self.customer_checkin_date = datetime.strptime(self.customer_checkin_date, "%d/%m/%Y").strftime("%d/%m/%Y")
                 break
             except ValueError:
                 print("Error: must be format dd/mm/yyyy ")
         while True:
-            self.customer_checkout_date = input("Enter Customer CheckOutDate  (day/month/year) = ")
+            self.customer_checkout_date = input("Enter Customer CheckOutDate  (day/month/year) = \n")
             try:
                 self.customer_checkout_date = datetime.strptime(self.customer_checkout_date, "%d/%m/%Y").strftime("%d/%m/%Y")
 
@@ -127,7 +127,7 @@ class Customer:
         self.num_of_nights = datetime.strptime(self.customer_checkout_date, "%d/%m/%Y").date()-datetime.strptime(self.customer_checkin_date, "%d/%m/%Y").date()
         self.num_of_nights = self.num_of_nights.days
         while True:
-            choice = int(input("Select Room Type (Enter 1 for Standard or 2 for Deluxe) = "))
+            choice = int(input("Select Room Type (Enter 1 for Standard or 2 for Deluxe) = \n"))
             try:
                 if(choice == 1):
                     self.room_type = "standard"
@@ -141,7 +141,7 @@ class Customer:
                 print("Please enter a number!")
         while (True):
             try:
-                self.num_of_guests = int(input("Enter Number of Guests (1-3) = "))
+                self.num_of_guests = int(input("Enter Number of Guests (1-3) = \n"))
                 if(self.num_of_guests >= 1 and self.num_of_guests <= 3):
                     break
                 else:
@@ -149,7 +149,7 @@ class Customer:
             except ValueError:
                 print("Please enter a number!")
         if update == False:
-            input("Press any key to continue...")
+            input("Press any key to continue... \n")
             clearScreen()
 
     def Total_num_of_customers(self):
@@ -229,7 +229,7 @@ def menu2_display_booking_data():
 
 # def menu2_display_bookingby_ID():
     flag = False
-    CustomerID = input("\nEnter Customer Id = ")
+    CustomerID = input("\nEnter Customer Id = \n")
     try:
         if len(CustomerList) != 0:
             for i in range(0, len(CustomerList)):
@@ -255,7 +255,8 @@ def menu2_display_booking_data():
 count = 0
 def main():
     """
-    function for main menu to navigate and run menu and sub menu using validations
+    function for main menu to navigate and run menu and sub menu using 
+    validations
     """
 
     CustomerList = []
@@ -374,8 +375,6 @@ def main():
                     quit()
                 if (choice > 3):
                     print("Please select a valid choice")
-
-    return CustomerList
 
 
 def create_booking_worksheet(data):
