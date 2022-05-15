@@ -375,6 +375,8 @@ def main():
                         elif(subMenu == 2):
                             # menu2_display_bookingby_ID()
                             display_by_booking_ID()
+                            sub_booking_display_menu()
+
                             break
                         elif(subMenu == 3):
                             clearScreen()
@@ -401,8 +403,10 @@ def display_all_bookings():
     bookings_worksheet_data = SHEET.worksheet("bookings")
     bookings_worksheet_data = bookings_worksheet_data.get_all_values()
     bookings_worksheet_data = bookings_worksheet_data[1:]
+    print("ID \t name \t DOB \t telephone \t check-in \t check-out \t room type \t price/night \t no.of guests \t total days \t grand total "   )
+
     for item in bookings_worksheet_data:
-        print(item[0]+"  "+item[1]+"  "+item[2]+"  "+item[3]+"  "+item[4]+"  "+item[5]+"  "+item[6]+"  "+item[7]+"  "+item[8]+"  "+item[9]+"  "+item[10])
+        print(item[0]+" \t "+item[1]+" \t "+item[2]+" \t "+item[3]+" \t "+item[4]+" \t "+item[5]+" \t "+item[6]+" \t "+item[7]+" \t "+item[8]+" \t "+item[9]+" \t "+item[10])
     
     input("\nPress any key to continue...\n")
 
@@ -413,16 +417,19 @@ def display_by_booking_ID():
     bookings_worksheet_data = SHEET.worksheet("bookings")
     bookings_worksheet_data = bookings_worksheet_data.get_all_values()
     bookings_worksheet_data = bookings_worksheet_data[1:]
+    headings = SHEET.worksheet('bookings').row_values(1)
     Found = False
-    id = input("Enter an ID = \n")
+    id = input("Enter an Id = ")
     for item in bookings_worksheet_data:
-        if (id == item[0]):
-            print("\n"+item[0]+" "+item[1]+" "+item[2]+" "+item[3]+" "+item[4]+" "+item[5]+" "+item[6]+" "+item[7]+" "+item[9]+" "+item[9]+" "+item[10]+"\n")
+        if(id == item[0]):
+            list = [item[0],item[1],item[2],item[3],item[4],item[5],item[6],item[7],item[9],item[9],item[10]]
+            headings = SHEET.worksheet('bookings').row_values(1)
+            dictionary = {key: value for key, value in zip(headings, list)}
+            print(dictionary)
             Found = True
             break
     if not Found:
         print("Customer with this Id not exist!")
-
 
 
 main()
