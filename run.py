@@ -185,6 +185,9 @@ class Customer:
         print("\n************************\n")
 
     def make_booking_list(self):
+        """
+
+        """
         data = []
         data.append(self.customer_id[0])
         data.append(self.customer_name)
@@ -252,7 +255,7 @@ def menu2_display_booking_data():
 count = 0
 def main():
     """
-    fuction for main menu
+    function for main menu to navigate and run menu and sub menu using validations
     """
 
     CustomerList = []
@@ -376,12 +379,18 @@ def main():
 
 
 def create_booking_worksheet(data):
+    """
+    Function to create and append booking into spreadsheet
+    """
     print(" Updating bookings worksheet.....")
     bookings_worksheet = SHEET.worksheet("bookings")
     bookings_worksheet.append_row(data)
     print("\n Bookings worksheet updated successfully \n")
 
 def display_all_bookings():
+    """
+    Functiont to display all created bookings within the spreadsheet to the terminal 
+    """
     bookings_worksheet_data = SHEET.worksheet("bookings")
     bookings_worksheet_data = bookings_worksheet_data.get_all_values()
     bookings_worksheet_data = bookings_worksheet_data[1:]
@@ -391,6 +400,9 @@ def display_all_bookings():
     input("\nPress any key to continue...\n")
 
 def display_by_booking_ID():
+    """
+    Function to get and display certain bookings using a booking ID number
+    """
     bookings_worksheet_data = SHEET.worksheet("bookings")
     bookings_worksheet_data = bookings_worksheet_data.get_all_values()
     bookings_worksheet_data = bookings_worksheet_data[1:]
