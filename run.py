@@ -89,8 +89,16 @@ class Customer:
         Function to enter customer data in a While loop with validations 
         until valid data is entered otherwise raise error
         """
+        while True:
+            self.customer_name = input("Enter Customer Name = \n")
+            try:
+                if (self.customer_name.isalpha()):
+                    break
+                elif (self.customer_name.isdigit()):
+                    print("Please enter alphabetic characters only")
+            except ValueError():
+                print("Please enter valid input")
 
-        self.customer_name = input("Enter Customer Name = \n")
 
         while True:
             self.customer_telephone = (input("Enter Customer Telephone = \n"))
@@ -264,7 +272,7 @@ def main():
     while True:
         main_menu()
         try:
-            choice = int(input("Enter your choice: "))
+            choice = int(input("Enter your choice: \n"))
         except ValueError:
             print("Please enter a number")
         else:
@@ -273,7 +281,7 @@ def main():
                 if (choice == 1):
                     sub_booking_menu()
                     try:
-                        subMenu = int(input(("Enter your choice = ")))
+                        subMenu = int(input(("Enter your choice = \n")))
                     except ValueError:
                         print("Please enter a number")
                     else:
@@ -358,7 +366,7 @@ def main():
                     clearScreen()
                     sub_booking_display_menu()
                     try:
-                        subMenu = int(input(("Enter your choice = ")))
+                        subMenu = int(input(("Enter your choice = \n")))
                     except ValueError:
                         print("Please enter a number")
                     else:
@@ -406,7 +414,7 @@ def display_by_booking_ID():
     bookings_worksheet_data = bookings_worksheet_data.get_all_values()
     bookings_worksheet_data = bookings_worksheet_data[1:]
     Found = False
-    id = input("Enter an ID = ")
+    id = input("Enter an ID = \n")
     for item in bookings_worksheet_data:
         if (id == item[0]):
             print("\n"+item[0]+" "+item[1]+" "+item[2]+" "+item[3]+" "+item[4]+" "+item[5]+" "+item[6]+" "+item[7]+" "+item[9]+" "+item[9]+" "+item[10]+"\n")
