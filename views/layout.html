@@ -8,12 +8,48 @@
     <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.1.1/jquery.min.js"></script>
     <script src="https://cdnjs.cloudflare.com/ajax/libs/xterm/3.14.5/xterm.min.js"></script>
     <script src="https://cdnjs.cloudflare.com/ajax/libs/xterm/3.14.5/addons/attach/attach.js"></script>
-    <title>Python Terminal by Code Institute</title>
+    <title>The Boutique Hotel Bookings System</title>
     <style>
         body {
             margin: 0px;
             text-align: center;
             font-family: Arial;
+        }
+
+        #container {
+            align-items: center;
+            display: flex;
+            flex-direction: column;
+            height: 100vh;
+            justify-content: center;
+            background-color: rgba(37, 36, 36, 0.7);
+        }
+
+
+        #background {
+            position: fixed;
+            top: 0;
+            left: 0;
+            z-index: -10;
+            height: 100vh;
+            width: 100%;
+        }
+
+        #container {
+            align-items: center;
+            display: flex;
+            flex-direction: column;
+            height: 100vh;
+            justify-content: center;
+            background-color: rgba(37, 36, 36, 0.7);
+        }
+
+
+        #background-image {
+            height: 100%;
+            position: relative;
+            left: 50%;
+            transform: translate(-50%, 0);
         }
 
         /**
@@ -170,6 +206,11 @@
     </style>
 </head>
 
-@{body}
+<div id="container">@{body}</div>
+<div id="background">
+
+   <a id="background-image" href="https://www.google.com/url?sa=i&url=https%3A%2F%2Fwww.archdaily.com%2F976438%2Fsumei-skyline-coast-boutique-hotel-gs-design&psig=AOvVaw0boQRad65u87aU_Xlectw7&ust=1652819516074000&source=images&cd=vfe&ved=0CAwQjRxqFwoTCMjrrNju5PcCFQAAAAAdAAAAABAD"></a>
+
+</div>
 
 </html>
