@@ -86,7 +86,7 @@ class Customer:
 
     def set_customer_data(self, update=False):
         """
-        Function to enter customer data in a While loop with validations 
+        Function to enter customer data in a While loop with validations
         until valid data is entered otherwise raise error
         """
         while True:
@@ -219,51 +219,11 @@ class Customer:
         return self.customer_id[0]
 
 
-def menu2_display_booking_data():
-    try:
-        if len(CustomerList) != 0:
-            for i in range(0, len(CustomerList)):
-                CustomerList[i].Get_customer_data()
-                input("Press any key to continue...")
-                clearScreen()
-        else:
-            raise Exception("Customer does not exist yet!")
-    except:
-        input("Customer does not exist yet!")
-        clearScreen()
-        sub_booking_menu()
-        clearScreen()
-
-
-# def menu2_display_bookingby_ID():
-    flag = False
-    CustomerID = input("\nEnter Customer Id = \n")
-    try:
-        if len(CustomerList) != 0:
-            for i in range(0, len(CustomerList)):
-                if CustomerID != None and CustomerID == str(CustomerList[i].Get_customer_id()):
-                    CustomerList[i].Get_customer_data()
-                else:
-                    flag = True
-        else:
-            raise Exception("Customer does not exist yet!")
-        if flag == True:
-            raise Exception("Customer with this ID does not exist!")
-        else:
-            input(" Displayed Successfully! ")
-            clearScreen()
-            sub_booking_menu()
-            clearScreen()
-    except:
-        input("Customer with this ID does not exist!!")
-        clearScreen()
-        sub_booking_menu()
-        clearScreen()
 
 count = 0
 def main():
     """
-    function for main menu to navigate and run menu and sub menu using 
+    function for main menu to navigate and run menu and sub menu using
     validations
     """
 
@@ -304,8 +264,10 @@ def main():
                             except:
                                 input("Customer does not exist yet!")
                                 clearScreen()
-                                sub_booking_menu()                                
+                                sub_booking_menu()
                                 clearScreen()
+                        
+                        # Future features delete/update booking
                         # elif(subMenu == 3):
                         #     # Delete a Customer
                         #     flag = False
@@ -373,10 +335,15 @@ def main():
                         if(subMenu == 1):
                             display_all_bookings()
                         elif(subMenu == 2):
-                            # menu2_display_bookingby_ID()
-                            display_by_booking_ID()
-                            sub_booking_display_menu()
-
+                            Found ,Dictionary = display_by_booking_ID()
+                            while True:
+                                if(Found == True):
+                                    print(Dictionary)
+                                    break
+                                else:
+                                    input("Customer doesn't exist with that ID")
+                                    clearScreen()
+                                    sub_booking_display_menu()
                             break
                         elif(subMenu == 3):
                             clearScreen()
@@ -398,38 +365,37 @@ def create_booking_worksheet(data):
 
 def display_all_bookings():
     """
-    Functiont to display all created bookings within the spreadsheet to the terminal 
+    Functiont to display all created bookings within the spreadsheet to the terminal
     """
     bookings_worksheet_data = SHEET.worksheet("bookings")
     bookings_worksheet_data = bookings_worksheet_data.get_all_values()
     bookings_worksheet_data = bookings_worksheet_data[1:]
-    print("ID \t name \t DOB \t telephone \t check-in \t check-out \t room type \t price/night \t no.of guests \t total days \t grand total "   )
 
     for item in bookings_worksheet_data:
-        print(item[0]+" \t "+item[1]+" \t "+item[2]+" \t "+item[3]+" \t "+item[4]+" \t "+item[5]+" \t "+item[6]+" \t "+item[7]+" \t "+item[8]+" \t "+item[9]+" \t "+item[10])
-    
+        print(item[0:11])
+
     input("\nPress any key to continue...\n")
+
 
 def display_by_booking_ID():
     """
-    Function to get and display certain bookings using a booking ID number
+    Function to get and display a certain booking using a booking ID number
     """
     bookings_worksheet_data = SHEET.worksheet("bookings")
     bookings_worksheet_data = bookings_worksheet_data.get_all_values()
     bookings_worksheet_data = bookings_worksheet_data[1:]
     headings = SHEET.worksheet('bookings').row_values(1)
     Found = False
+    dictionary = {}
     id = input("Enter an Id = ")
     for item in bookings_worksheet_data:
         if(id == item[0]):
-            list = [item[0],item[1],item[2],item[3],item[4],item[5],item[6],item[7],item[9],item[9],item[10]]
+            list = [item[0], item[1], item[2], item[3], item[4], item[5], item[6], item[7], item[9], item[9], item[10]]
             headings = SHEET.worksheet('bookings').row_values(1)
             dictionary = {key: value for key, value in zip(headings, list)}
-            print(dictionary)
             Found = True
             break
-    if not Found:
-        print("Customer with this Id not exist!")
+    return Found, dictionary
 
 
 main()
