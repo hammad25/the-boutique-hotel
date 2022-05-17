@@ -32,8 +32,16 @@
             z-index: -10;
             height: 100vh;
             width: 100%;
+        }
+
+        #background-image {
+            height: 100%;
+            position: relative;
+            left: 50%;
+            transform: translate(-50%, 0);
             background-image: url(/assets/images/sumei-skyline-coast-boutique-hotel-gs-design-6.jpeg);
             background-repeat: round;
+
         }
 
 
@@ -195,7 +203,7 @@
 
 <div id="container">@{body}</div>
 <div id="background">
-    <a id="background-image" href="/assets/images/sumei-skyline-coast-boutique-hotel-gs-design-6.jpeg"></a>
+    <div id="background-image" ></div>
 </div>
 
 </html>
