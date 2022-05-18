@@ -335,15 +335,7 @@ def main():
                         if(subMenu == 1):
                             display_all_bookings()
                         elif(subMenu == 2):
-                            Found ,Dictionary = display_by_booking_ID()
-                            while True:
-                                if(Found == True):
-                                    print(Dictionary)
-                                    break
-                                else:
-                                    input("Customer doesn't exist with that ID")
-                                    clearScreen()
-                                    sub_booking_display_menu()
+                            display_by_booking_ID()
                             break
                         elif(subMenu == 3):
                             clearScreen()
@@ -387,15 +379,19 @@ def display_by_booking_ID():
     headings = SHEET.worksheet('bookings').row_values(1)
     Found = False
     dictionary = {}
-    id = input("Enter an Id = ")
+    id = input("Enter an Id = \n")
     for item in bookings_worksheet_data:
-        if(id == item[0]):
-            list = [item[0], item[1], item[2], item[3], item[4], item[5], item[6], item[7], item[9], item[9], item[10]]
-            headings = SHEET.worksheet('bookings').row_values(1)
-            dictionary = {key: value for key, value in zip(headings, list)}
-            Found = True
-            break
-    return Found, dictionary
+            if(id == item[0]):
+                list = [item[0], item[1], item[2], item[3], item[4], item[5], item[6], item[7], item[9], item[9], item[10]]
+                headings = SHEET.worksheet('bookings').row_values(1)
+                dictionary = {key: value for key, value in zip(headings, list)}
+                Found = True
+                print("\n")
+                print(dictionary)
+                break
+    else:
+        print("Customer does not exist with this ID")
+        display_by_booking_ID()
 
 
 main()

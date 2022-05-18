@@ -16,7 +16,6 @@ In this project I have created a hotel bookings management system that links to 
   * [***Languages***](#Languages)
   * [***Libraries***](#Libraries)
 * [**Testing**](#testing)
-    * [***Code validation:***](#code-validation)
     * [***test cases***](#test-cases)
     * [**Fixed bugs:**](#fixed-bugs)
     * [**Supported screens**](#supported-screens)
@@ -77,29 +76,42 @@ In this project I have created a hotel bookings management system that links to 
   * [Am I Responsive?](http://ami.responsivedesign.is/# "Link to Am I Responsive Homepage")- Am I Responsive? was used to see if the site is responsive on different types of devices.
   * [Lucid](https://www.lucidchart.com/) - To create the flow chart 
 
+## Testing
+### test cases
+* Through out the project I have carried out regular testing using print statments
+* A booking system that to create and display bookings
+![Booking]()
+* Navigate throught the menu and sub menu
+![Booking]()
+* User is prompted to enter specific data to generate booking 
+* Display room price based on type of room
+![Booking]()
+* The system runs an error if the type or format is incorrect
+![Booking]()
+* Displays the unique booking ID and calculates total cost of stay
+![Booking]()
+* Display all bookings stored within the spread sheet
+![Booking]()
+* Display specific booking by booking ID
+![Booking]()
+
+### Fixed bugs
+* Broken while loop, when inaccurate booking ID entered, displays error of "Customer doesn't exist with that ID" but does not prompt for ID again
+![Booking]()
+* To resolve the bug I removed the while loop and recalled the functions within its self at the end of the code block with in the **else** of an **if/else** statement 
 
 
 
 
 7. [Bugs](#Bugs)
-
 8. [Other Features](#Other-Features)
-
 9. [Features Left to Implement](#Feature-Left-to-Implement)
-
 10. [Technologies Used](#Technologies-Used)
-
 11. [Frameworks Libraries and Programs Used](#Frameworks-Libraries-and-Programs-Used)
-
 12. [Testing](#Testing)
-
     - [Testings.md](assets/test-file/testings.md)
-
 13. [Deployment](#Deployment)
-
 14. [Make a clone](#Make-a-clone)
-
 15. [Credit](#Credit)
-
 16. [Acknowledgements](#Acknowledgements)
 ***
