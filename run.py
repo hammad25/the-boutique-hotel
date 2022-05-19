@@ -35,8 +35,6 @@ def sub_booking_menu():
     """
     print("1. Enter a Booking")
     print("2. Display Booking")
-    # print("3. Delete Booking")
-    # print("4. Update Booking")
     print("3. Back to main menu")
 
 
@@ -339,7 +337,6 @@ def display_all_bookings():
     for item in bookings_worksheet_data:
         display_customer_data(item)
 
-
     input("\nPress any key to continue...\n")
 
 
@@ -353,9 +350,9 @@ def display_by_booking_ID():
 
     id = input("Enter an Id = \n")
     for item in bookings_worksheet_data:
-            if(id == item[0]):
-                display_customer_data(item)
-                break
+        f(id == item[0]):
+        display_customer_data(item)
+        break
     else:
         print("Customer does not exist with this ID")
         display_by_booking_ID()
