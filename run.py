@@ -33,7 +33,6 @@ def sub_booking_menu():
     """
     Function to display booking options when choose 1 in main_menu()
     """
-    print(" Standard Room Price --> £200 AND Deluxe Room Price --> £400")
     print("1. Enter a Booking")
     print("2. Display Booking")
     # print("3. Delete Booking")
@@ -135,6 +134,7 @@ class Customer:
         self.num_of_nights = datetime.strptime(self.customer_checkout_date, "%d/%m/%Y").date()-datetime.strptime(self.customer_checkin_date, "%d/%m/%Y").date()
         self.num_of_nights = self.num_of_nights.days
         while True:
+            print(" Standard Room Price --> £200 AND Deluxe Room Price --> £400")
             choice = int(input("Select Room Type (Enter 1 for Standard or 2 for Deluxe) = \n"))
             try:
                 if(choice == 1):

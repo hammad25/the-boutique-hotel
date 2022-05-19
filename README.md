@@ -12,6 +12,7 @@ In this project I have created a hotel bookings management system that links to 
 * [**Design**](#design)
 * [**Flowchart**](#Flowchart)
 * [**Current Features**](#current-features)
+  * [**Future Features**](#Future-features)
 * [**Technology**](#technology)
   * [***Languages***](#Languages)
   * [***Libraries***](#Libraries)
@@ -19,6 +20,7 @@ In this project I have created a hotel bookings management system that links to 
     * [***test cases***](#test-cases)
     * [**Fixed bugs:**](#fixed-bugs)
 * [**Deployment**](#deployment)
+  * [**GitHub](#Github)
   * [**Heroku**](#Heroku)
   * [**Make a clone**](#Clone)
 * [**Credits**](#credits)
@@ -60,7 +62,8 @@ In this project I have created a hotel bookings management system that links to 
 * **Display all Booking Data**, display all bookings stored in the spreadsheet
 * **Display Booking Data by BookingID**, promopts the user to enter an ID and displays only the booking with that ID.
 
-
+### Future Features
+* Add a feature to update booking and also to delete bookings
 
 ## Technology
   ### Languages 
@@ -68,7 +71,7 @@ In this project I have created a hotel bookings management system that links to 
   * [CSS:](https://www.w3.org/Style/CSS/) - CSS was used to style.CSS was used to manage the UI.
   * [Python](https://www.python.org/) - Used for the main interaction with the user.
 
-  ### Libraies
+  ### Libraries
   * [Git](https://git-scm.com/) - Git was used to managing the code. Allowing me to create backups whenever significant changes were made to code by utilizing the gitpod terminal to commit to Git and Push to GitHub.
   * [GitHub:](https://github.com/) - GitHub was used to externally store repository and site deployment.
   * [Os](https://docs.python.org/3/library/os.html "Link to os homepage") -Os library was used to clear the previous print statement in the terminal.
@@ -110,6 +113,13 @@ In this project I have created a hotel bookings management system that links to 
   ![Booking](./assets/readme-files/test-bug-fixed.png)
 
 ## Deployment
+### GitHub 
+  - [Login](https://github.com/) to GitHub
+  - Click "Repository" and select "New"
+  - Give the repository a name and description and then click "Create repository"
+  - Click "Gitpod" to start editing
+  - In the terminal enter "python3 run.py" to run your code
+
 ### Heroku
 * The project was deployed using [Heroku](https://www.heroku.com)
 *  Navigate to your [heroku dashboard](https://dashboard.heroku.com/apps)
