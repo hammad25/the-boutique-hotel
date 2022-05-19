@@ -160,6 +160,9 @@ class Customer:
             input("Press any key to continue... \n")
             clearScreen()
 
+
+
+
     def Total_num_of_customers(self):
         """
         Method to print total number of customers
@@ -192,9 +195,10 @@ class Customer:
         print("Total Price =        "+str(self.calculations())+"£")
         print("\n************************\n")
 
+
     def make_booking_list(self):
         """
-
+        Function to store data in spreadsheet
         """
         data = []
         data.append(self.customer_id[0])
@@ -266,59 +270,7 @@ def main():
                                 clearScreen()
                                 sub_booking_menu()
                                 clearScreen()
-                        
-                        # Future features delete/update booking
-                        # elif(subMenu == 3):
-                        #     # Delete a Customer
-                        #     flag = False
-                        #     CustomerID = input("\nEnter Customer Id = ")
-                        #     try:
-                        #         if len(CustomerList) != 0:
-                        #             for i in range(0, len(CustomerList)):
-                        #                 if CustomerID != None and CustomerID == str(CustomerList[i].Get_customer_id()):
-                        #                     del CustomerList[i]
-                        #                 else:
-                        #                     flag = True
-                        #         else:
-                        #             raise Exception("Customer does not exist yet!")
-                        #         if flag == True:
-                        #             raise Exception("Customer with this ID does not exist!")
-                        #         else:
-                        #             input(" Deleted Successfully! ")
-                        #             clearScreen()
-                        #             sub_booking_menu()
-                        #             clearScreen()
-                        #     except:
-                        #         input("Customer with this ID does not exist!!")
-                        #         clearScreen()
-                        #         sub_booking_menu()
-                        #         clearScreen()
-                        # elif(subMenu == 4):
-                            # Update a Customer
-                            # flag = False
-                            # CustomerID = input("\nEnter Customer Id = ")
-                            # try:
-                            #     if len(CustomerList) != 0:
-                            #         for i in range(0, len(CustomerList)):
-                            #             if CustomerID != None and CustomerID == str(CustomerList[i].Get_customer_id()):
-                            #                 CustomerList[i].set_customer_data(True)
-                            #                 break
-                            #             else:
-                            #                 flag = True
-                            #     else:
-                            #         raise Exception("Customer does not exist yet!")
-                            #     if flag == True:
-                            #         raise Exception("Customer with this ID does not exist!")
-                            #     else:
-                            #         input(" Updated Successfully! ")
-                            #         clearScreen()
-                            #         sub_booking_menu()
-                            #         clearScreen()
-                            # except:
-                            #     input("Customer with this ID does not exist!!")
-                            #     clearScreen()
-                            #     sub_booking_menu()
-                            #     clearScreen()
+                                
                         elif(subMenu == 3):
                             clearScreen()
                             break
@@ -355,6 +307,26 @@ def create_booking_worksheet(data):
     bookings_worksheet.append_row(data)
     print("\n Bookings worksheet updated successfully \n")
 
+
+def display_customer_data(item):
+    """
+    Function to display customer booking data
+    """
+    print("\n************************\n")
+    print("Customer ID =        " + item[0])
+    print("Customer Name =      " + item[1])
+    print("Customer DOB =       " + item[2])
+    print("Customer telephone = " + item[3])
+    print("Customer Check-in=   " + item[4])
+    print("Customer Check-out=  " + item[5])
+    print("Room Type =          " + item[6])
+    print("Room per night =     " + item[7])
+    print("No. of guests =      " + item[8])
+    print("Total nights =       " + item[9])
+    print("Total Price =        " + "£"+ item[10])
+    print("\n************************\n")
+
+
 def display_all_bookings():
     """
     Functiont to display all created bookings within the spreadsheet to the terminal
@@ -364,7 +336,8 @@ def display_all_bookings():
     bookings_worksheet_data = bookings_worksheet_data[1:]
 
     for item in bookings_worksheet_data:
-        print(item[0:11])
+        display_customer_data(item)
+
 
     input("\nPress any key to continue...\n")
 
@@ -376,18 +349,11 @@ def display_by_booking_ID():
     bookings_worksheet_data = SHEET.worksheet("bookings")
     bookings_worksheet_data = bookings_worksheet_data.get_all_values()
     bookings_worksheet_data = bookings_worksheet_data[1:]
-    headings = SHEET.worksheet('bookings').row_values(1)
-    Found = False
-    dictionary = {}
+
     id = input("Enter an Id = \n")
     for item in bookings_worksheet_data:
             if(id == item[0]):
-                list = [item[0], item[1], item[2], item[3], item[4], item[5], item[6], item[7], item[9], item[9], item[10]]
-                headings = SHEET.worksheet('bookings').row_values(1)
-                dictionary = {key: value for key, value in zip(headings, list)}
-                Found = True
-                print("\n")
-                print(dictionary)
+                display_customer_data(item)
                 break
     else:
         print("Customer does not exist with this ID")

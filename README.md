@@ -60,6 +60,8 @@ In this project I have created a hotel bookings management system that links to 
 * **Display all Booking Data**, display all bookings stored in the spreadsheet
 * **Display Booking Data by BookingID**, promopts the user to enter an ID and displays only the booking with that ID.
 
+
+
 ## Technology
   ### Languages 
   * [HTML:](https://www.w3.org/html/)  - HTML5 provided the skeleton for the project for the display
