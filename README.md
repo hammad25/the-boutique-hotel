@@ -3,7 +3,7 @@
 * [Live link](https://the-boutique-hotel.herokuapp.com/) of the project
 
 ## Project Overview
-In this project I have created a hotel bookings management system that links to a spreadsheet. The user operating the system can create a booking by entering inputs of the client for whom the booking is made. The system ensures correct data is entered within each input by rasising an error if incorrect data or format is entered. The system also generates a total cost to stay at the hotel based on the type of room selected, the number of nights and people. Finallythe system than generates a booking ID for each client and adds it to the spreadsheet. The user can also fetch all bookings to be displayed altogether or display each booking by entering a specific booking ID.
+In this project I have created a hotel bookings management system that links to a spreadsheet. The user operating the system can create a booking by entering inputs of the client for whom the booking is made. The system ensures correct data is entered within each input by raising an error if incorrect data or format is entered. The system also generates a total cost of stay at the hotel based on the type of room selected, the number of nights and number of guests. Finally the system than generates a booking ID for each client and adds it to the spreadsheet. The user can also fetch all bookings to be displayed altogether or display each booking by entering a specific booking ID.
 
 ## Table of contents:
 * [**The Boutique Hotel**](#the-boutique-hotel)
@@ -19,8 +19,9 @@ In this project I have created a hotel bookings management system that links to 
 * [**Testing**](#testing)
     * [***test cases***](#test-cases)
     * [**Fixed bugs:**](#fixed-bugs)
+    * [**Validation**](#validation)
 * [**Deployment**](#deployment)
-  * [**GitHub](#Github)
+  * [**GitHub**](#Github)
   * [**Heroku**](#Heroku)
   * [**Make a clone**](#Clone)
 * [**Credits**](#credits)
@@ -47,7 +48,7 @@ In this project I have created a hotel bookings management system that links to 
   2. **Display Booking Data**
   3. **Exit**
 
-* **Enter/Manage Bookings**, a booking sub menu opens displaying the room type and price at the tope and 3 options:
+* **Enter/Manage Bookings**, a booking sub menu opens displaying 3 options:
   1. **The Enter a booking**
   2. **Display booking**
   3. **Back to main menu**
@@ -100,7 +101,7 @@ In this project I have created a hotel bookings management system that links to 
 * Displays the unique booking ID and calculates total cost of stay
   ![Booking](./assets/readme-files/test-ID-total-cost.png)
 * Display all bookings stored within the spread sheet
-  ![Booking](./assets/readme-files/test-display-all.png)
+  ![Booking](./assets/readme-files/test-display-all.png.png)
 * Display specific booking by booking ID
   ![Booking](./assets/readme-files/test-display-by-ID.png)
 
