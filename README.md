@@ -112,6 +112,9 @@ In this project I have created a hotel bookings management system that links to 
 
   ![Booking](./assets/readme-files/test-bug-fixed.png)
 
+  ### Validation
+  * [PEP8](http://pep8online.com/) was used to check code errors
+
 ## Deployment
 ### GitHub 
   - [Login](https://github.com/) to GitHub
