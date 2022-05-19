@@ -1,5 +1,5 @@
 #  The Boutique Hotel
-![The Boutique Hotel ](/assets/readme-files/responsive.PNG)
+![The Boutique Hotel ](./assets/readme-files/responsive.PNG)
 * [Live link](https://the-boutique-hotel.herokuapp.com/) of the project
 
 ## Project Overview
@@ -79,25 +79,33 @@ In this project I have created a hotel bookings management system that links to 
 ### test cases
 * Through out the project I have carried out regular testing using print statments
 * A booking system that creates,stores and display bookings
-![Booking]()
+  ![test](./assets/readme-files/test1.png)
 * Navigate throught the menu and sub menu
-![Booking]()
-* User is prompted to enter specific data to generate booking 
+
+  ![Booking](./assets/readme-files/test-sub-menu.png)
+  ![Booking](./assets/readme-files/test-sub-menu2.png)
 * Display room price based on type of room
-![Booking]()
+* User is prompted to enter specific data to generate booking 
+  ![Booking](./assets/readme-files/test-enter-specific-data.png)
+  ![Booking](./assets/readme-files/test-store-data.png)
 * The system runs an error if the type or format is incorrect
-![Booking]()
+  ![Booking](./assets/readme-files/test-error1.png)
+  ![Booking](./assets/readme-files/test-error2.png)
+  ![Booking](./assets/readme-files/test-error3.png)
 * Displays the unique booking ID and calculates total cost of stay
-![Booking]()
+  ![Booking](./assets/readme-files/test-ID-total-cost.png)
 * Display all bookings stored within the spread sheet
-![Booking]()
+  ![Booking](./assets/readme-files/test-display-all.png)
 * Display specific booking by booking ID
-![Booking]()
+  ![Booking](./assets/readme-files/test-display-by-ID.png)
 
 ### Fixed bugs
-* Broken while loop, when inaccurate booking ID entered, displays error of "Customer doesn't exist with that ID" but does not prompt for ID again
-![Booking]()
-* To resolve the bug I removed the while loop and recalled the functions within its self at the end of the code block with in the **else** of an **if/else** statement 
+* Broken while loop, when inaccurate booking ID entered, displays error of "Customer doesn't exist with that ID " but does not prompt for ID again.
+
+  ![Booking](./assets/readme-files/bug.png)
+* To resolve the bug I removed the while loop and recalled the functions within its self at the end of the code block with in the **else** of an **if/else** statement.
+
+  ![Booking](./assets/readme-files/test-bug-fixed.png)
 
 ## Deployment
 ### Heroku
