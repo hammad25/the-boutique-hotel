@@ -296,6 +296,7 @@ def main():
                     quit()
                 if (choice > 3):
                     print("Please select a valid choice")
+                    break 
 
 
 def create_booking_worksheet(data):
