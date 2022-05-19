@@ -78,7 +78,7 @@ In this project I have created a hotel bookings management system that links to 
 ## Testing
 ### test cases
 * Through out the project I have carried out regular testing using print statments
-* A booking system that to create and display bookings
+* A booking system that creates,stores and display bookings
 ![Booking]()
 * Navigate throught the menu and sub menu
 ![Booking]()
@@ -140,8 +140,7 @@ The site is now live and operational
   - Type "git clone" followed by URL
   - Press "Enter" to create clone
 
-
-* [**Credits**](#credits)
-abubakr
-rohit
-youtube
+## Credits
+* My friend Abu Bakar for his time helping me explain code logic flows and methodology 
+* Rohit Sharma, my mentor, for keeping me on track at different stages of the project and pace my work feature by feature.
+* [pynative](https://pynative.com/) helped me go over concepts and examples 
