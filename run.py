@@ -151,7 +151,7 @@ class Customer:
         self.num_of_nights = self.num_of_nights.days
         while True:
             print(
-                " Standard Room Price --> £200 AND Deluxe Room Price --> £400"
+                "Standard Room Price --> £200 AND Deluxe Room Price --> £400"
             )
             choice = int(
                 input(
@@ -222,7 +222,7 @@ class Customer:
         print("Room Type =          " + self.room_type)
         print("Customer Check-in=   " + str(self.customer_checkin_date))
         print("Customer Check-out=  " + str(self.customer_checkout_date))
-        print("Total Price =        " + str(self.calculations()) + "£")
+        print("Total Price =        " + "£" + str(self.calculations()) )
         print("\n************************\n")
 
     def make_booking_list(self):
