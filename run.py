@@ -9,13 +9,13 @@ from google.oauth2.service_account import Credentials
 SCOPE = [
     "https://www.googleapis.com/auth/spreadsheets",
     "https://www.googleapis.com/auth/drive.file",
-    "https://www.googleapis.com/auth/drive"
-    ]
+    "https://www.googleapis.com/auth/drive",
+]
 
-CREDS = Credentials.from_service_account_file('creds.json')
+CREDS = Credentials.from_service_account_file("creds.json")
 SCOPED_CREDS = CREDS.with_scopes(SCOPE)
 GSPREAD_CLIENT = gspread.authorize(SCOPED_CREDS)
-SHEET = GSPREAD_CLIENT.open('The-Boutique-Hotel')
+SHEET = GSPREAD_CLIENT.open("The-Boutique-Hotel")
 
 
 def main_menu():
@@ -63,6 +63,7 @@ class Customer:
     """
     Create instance of Customer
     """
+
     num_of_customers = 0
 
     def __init__(self):
@@ -70,8 +71,8 @@ class Customer:
         self.customer_name = None
         self.ctm_age = None
         self.ctm_phone = None
-        self.ctm_checkin = datetime.today().strftime('%d/%m/%Y')
-        self.ctm_checkout = datetime.today().strftime('%d/%m/%Y')
+        self.ctm_checkin = datetime.today().strftime("%d/%m/%Y")
+        self.ctm_checkout = datetime.today().strftime("%d/%m/%Y")
         Customer.num_of_customers += 1
         self.total_customers = Customer.num_of_customers
         self.room_type = None
@@ -89,17 +90,17 @@ class Customer:
         while True:
             self.customer_name = input("Enter Customer Name = \n")
             try:
-                if (self.customer_name.isalpha()):
+                if self.customer_name.isalpha():
                     break
-                elif (self.customer_name.isdigit()):
+                elif self.customer_name.isdigit():
                     print("Error: Input can be alphabetic characters only")
             except ValueError():
                 print("Please enter valid input")
 
         while True:
-            self.ctm_phone = (input("Enter Customer Telephone = \n"))
+            self.ctm_phone = input("Enter Customer Telephone = \n")
             try:
-                if(len(self.ctm_phone) == 11 and self.ctm_phone.isnumeric()):
+                if len(self.ctm_phone) == 11 and self.ctm_phone.isnumeric():
                     break
                 else:
                     print("please enter a 11 digit number")
@@ -109,66 +110,69 @@ class Customer:
         while True:
             self.ctm_age = input("Enter Customer Age (day/month/year) = \n")
             try:
-                self.ctm_age = (
-                    datetime.strptime(self.ctm_age, "%d/%m/%Y").
-                    strftime("%d/%m/%Y")
-                    )
+                self.ctm_age = datetime.strptime(
+                    self.ctm_age, "%d/%m/%Y"
+                ).strftime("%d/%m/%Y")
                 break
             except ValueError:
                 print("Error: must be format dd/mm/yyyy ")
         while True:
-            self.ctm_checkin = (input("Enter Customer\
-                                CheckInDate (day/month/year) = \n"))
+            self.ctm_checkin = input("Enter CheckInDate (day/month/year) = \n")
             try:
-                self.ctm_checkin = (
-                    datetime.strptime(self.ctm_checkin, "%d/%m/%Y").strftime()
-                    )
+                self.ctm_checkin = datetime.strptime(
+                    self.ctm_checkin, "%d/%m/%Y"
+                ).strftime()
                 break
             except ValueError:
                 print("Error: must be format dd/mm/yyyy ")
         while True:
-            self.ctm_checkout = (input("Enter Customer \
-                                        CheckOutDate  (day/month/year) = \n"))
+            self.ctm_checkout = input(
+                "Enter Customer CheckOutDate                   "
+                " (day/month/year) = \n"
+            )
             try:
                 self.ctm_checkout = [
-                    datetime.strptime(self.ctm_checkout, "%d/%m/%Y").
-                    strftime("%d/%m/%Y")
-                    ]
+                    datetime.strptime(self.ctm_checkout, "%d/%m/%Y").strftime(
+                        "%d/%m/%Y"
+                    )
+                ]
 
                 break
             except ValueError:
                 print("Error: must be format dd/mm/yyyy ")
         self.num_of_nights = (
-            datetime.strptime(self.ctm_checkout,
-            "%d/%m/%Y").date()-datetime.
-            strptime(self.ctm_checkin, "%d/%m/%Y").date()
-            )
+            datetime.strptime(self.ctm_checkout, "%d/%m/%Y").date()
+            - datetime.strptime(self.ctm_checkin, "%d/%m/%Y").date()
+        )
         self.num_of_nights = self.num_of_nights.days
         while True:
             print(
-                "Standard Room Price --> \
-                £200 AND Deluxe Room Price --> £400"
+                "Standard Room Price -->                 £200 AND Deluxe Room"
+                " Price --> £400"
+            )
+            choice = int(
+                input(
+                    "Select Room Type                (Enter 1 for Standard or"
+                    " 2 for Deluxe) = \n"
                 )
-            choice = (
-                int(input("Select Room Type\
-                (Enter 1 for Standard or 2 for Deluxe) = \n"))
-                )
+            )
             try:
-                if(choice == 1):
+                if choice == 1:
                     self.room_type = "standard"
                     break
-                elif(choice == 2):
+                elif choice == 2:
                     self.room_type = "deluxe"
                     break
                 else:
                     print("\n please choice valid option!")
             except ValueError:
                 print("Please enter a number!")
-        while (True):
+        while True:
             try:
-                self.num_of_guests = int(input("Enter Number\
-                                                of Guests (1-3) = \n"))
-                if(self.num_of_guests >= 1 and self.num_of_guests <= 3):
+                self.num_of_guests = int(
+                    input("Enter Number of Guests (1-3) = \n")
+                )
+                if self.num_of_guests >= 1 and self.num_of_guests <= 3:
                     break
                 else:
                     print("Guests must be between 1 to 3")
@@ -182,20 +186,24 @@ class Customer:
         """
         Method to print total number of customers
         """
-        print("Total Number Of Customers= "+str(self.total_customers))
+        print("Total Number Of Customers= " + str(self.total_customers))
 
     def calculations(self):
-        """"
+        """ "
         Function to calculate room price
         """
-        if(self.room_type == "standard"):
+        if self.room_type == "standard":
             self.total_price = (
                 int(self.num_of_nights)
-                * self.standard_room_price*self.num_of_guests
-                )
-        elif(self.room_type == "deluxe"):
-            self.total_price = [int(self.num_of_nights)*self.
-                                deluxe_room_price*self.num_of_guests]
+                * self.standard_room_price
+                * self.num_of_guests
+            )
+        elif self.room_type == "deluxe":
+            self.total_price = [
+                int(self.num_of_nights)
+                * self.deluxe_room_price
+                * self.num_of_guests
+            ]
         self.total_price = self.total_price
         return self.total_price
 
@@ -204,14 +212,14 @@ class Customer:
         Function to display customer data
         """
         print("\n************************\n")
-        print("Customer ID =        "+str(self.customer_id[0]))
-        print("Customer Name =      "+self.customer_name)
-        print("Customer Age =       "+str(self.ctm_age))
-        print("Customer telephone = "+self.ctm_phone)
-        print("Room Type =          "+self.room_type)
-        print("Customer Check-in=   "+str(self.ctm_checkin))
-        print("Customer Check-out=  "+str(self.ctm_checkout))
-        print("Total Price =        "+str(self.calculations())+"£")
+        print("Customer ID =        " + str(self.customer_id[0]))
+        print("Customer Name =      " + self.customer_name)
+        print("Customer Age =       " + str(self.ctm_age))
+        print("Customer telephone = " + self.ctm_phone)
+        print("Room Type =          " + self.room_type)
+        print("Customer Check-in=   " + str(self.ctm_checkin))
+        print("Customer Check-out=  " + str(self.ctm_checkout))
+        print("Total Price =        " + str(self.calculations()) + "£")
         print("\n************************\n")
 
     def make_booking_list(self):
@@ -226,9 +234,9 @@ class Customer:
         data.append(str(self.ctm_checkin))
         data.append(str(self.ctm_checkout))
         data.append(self.room_type)
-        if(self.room_type == "standard"):
+        if self.room_type == "standard":
             data.append(self.standard_room_price)
-        elif(self.room_type == "deluxe"):
+        elif self.room_type == "deluxe":
             data.append(self.deluxe_room_price)
         data.append(self.num_of_guests)
         data.append(self.num_of_nights)
@@ -260,23 +268,23 @@ def main():
         else:
             clearScreen()
             while True:
-                if (choice == 1):
+                if choice == 1:
                     sub_booking_menu()
                     try:
-                        subMenu = int(input(("Enter your choice = \n")))
+                        subMenu = int(input("Enter your choice = \n"))
                     except ValueError:
                         print("Please enter a number")
                     else:
-                        if(subMenu == 1):
+                        if subMenu == 1:
                             CustomerList.append(Customer())
                             global count
                             CustomerList[count].set_customer_data()
                             create_booking_worksheet(
                                 CustomerList[count].make_booking_list()
-                                )
-                            count = count+1
+                            )
+                            count = count + 1
 
-                        elif(subMenu == 2):
+                        elif subMenu == 2:
                             try:
                                 if len(CustomerList) != 0:
                                     for i in range(0, len(CustomerList)):
@@ -284,37 +292,38 @@ def main():
                                         input("Press any key to continue...")
                                         clearScreen()
                                 else:
-                                    raise Exception("Customer"
-                                                    "doesnt exist yet!")
+                                    raise Exception(
+                                        "Customerdoesnt exist yet!"
+                                    )
                             except:
                                 input("Customer does not exist yet!")
                                 clearScreen()
                                 sub_booking_menu()
                                 clearScreen()
-                        elif(subMenu == 3):
+                        elif subMenu == 3:
                             clearScreen()
                             break
                         else:
                             print("Please select a valid choice")
-                if (choice == 2):
+                if choice == 2:
                     clearScreen()
                     sub_booking_display_menu()
                     try:
-                        subMenu = int(input(("Enter your choice = \n")))
+                        subMenu = int(input("Enter your choice = \n"))
                     except ValueError:
                         print("Please enter a number")
                     else:
-                        if(subMenu == 1):
+                        if subMenu == 1:
                             display_all_bookings()
-                        elif(subMenu == 2):
+                        elif subMenu == 2:
                             display_by_booking_ID()
                             break
-                        elif(subMenu == 3):
+                        elif subMenu == 3:
                             clearScreen()
                             break
-                if (choice == 3):
+                if choice == 3:
                     quit()
-                if (choice > 3):
+                if choice > 3:
                     print("Please select a valid choice")
                     break
 
@@ -373,7 +382,7 @@ def display_by_booking_ID():
 
     id = input("Enter an Id = \n")
     for item in bookings_worksheet_data:
-        if(id == item[0]):
+        if id == item[0]:
             display_customer_data(item)
             break
     else:
