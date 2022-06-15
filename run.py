@@ -69,10 +69,10 @@ class Customer:
     def __init__(self):
         self.customer_id = random.sample(range(1, 10000), 1)
         self.customer_name = None
-        self.ctm_age = None
-        self.ctm_phone = None
-        self.ctm_checkin = datetime.today().strftime("%d/%m/%Y")
-        self.ctm_checkout = datetime.today().strftime("%d/%m/%Y")
+        self.customer_age = None
+        self.customer_telephone = None
+        self.customer_checkin_date = datetime.today().strftime("%d/%m/%Y")
+        self.customer_checkout_date = datetime.today().strftime("%d/%m/%Y")
         Customer.num_of_customers += 1
         self.total_customers = Customer.num_of_customers
         self.room_type = None
@@ -93,14 +93,17 @@ class Customer:
                 if self.customer_name.isalpha():
                     break
                 elif self.customer_name.isdigit():
-                    print("Error: Input can be alphabetic characters only")
+                    print("Please enter alphabetic characters only")
             except ValueError():
                 print("Please enter valid input")
 
         while True:
-            self.ctm_phone = input("Enter Customer Telephone = \n")
+            self.customer_telephone = input("Enter Customer Telephone = \n")
             try:
-                if len(self.ctm_phone) == 11 and self.ctm_phone.isnumeric():
+                if (
+                    len(self.customer_telephone) == 11
+                    and self.customer_telephone.isnumeric()
+                ):
                     break
                 else:
                     print("please enter a 11 digit number")
@@ -108,51 +111,52 @@ class Customer:
                 print("please enter a number")
 
         while True:
-            self.ctm_age = input("Enter Customer Age (day/month/year) = \n")
-            try:
-                self.ctm_age = datetime.strptime(
-                    self.ctm_age, "%d/%m/%Y"
-                ).strftime("%d/%m/%Y")
-                break
-            except ValueError:
-                print("Error: must be format dd/mm/yyyy ")
-        while True:
-            self.ctm_checkin = input("Enter CheckInDate (day/month/year) = \n")
-            try:
-                self.ctm_checkin = datetime.strptime(
-                    self.ctm_checkin, "%d/%m/%Y"
-                ).strftime("%d/%m/%Y")
-                break
-            except ValueError:
-                print("Error: must be format dd/mm/yyyy ")
-        while True:
-            self.ctm_checkout = input(
-                "Enter Customer CheckOutDate (day/month/year) = \n"
+            self.customer_age = input(
+                "Enter Customer Age (day/month/year) = \n"
             )
             try:
-                self.ctm_checkout = [
-                    datetime.strptime(self.ctm_checkout, "%d/%m/%Y").strftime(
-                        "%d/%m/%Y"
-                    )
-                ]
+                self.customer_age = datetime.strptime(
+                    self.customer_age, "%d/%m/%Y"
+                ).strftime("%d/%m/%Y")
+                break
+            except ValueError:
+                print("Error: must be format dd/mm/yyyy ")
+        while True:
+            self.customer_checkin_date = input(
+                "Enter Customer CheckInDate (day/month/year) = \n"
+            )
+            try:
+                self.customer_checkin_date = datetime.strptime(
+                    self.customer_checkin_date, "%d/%m/%Y"
+                ).strftime("%d/%m/%Y")
+                break
+            except ValueError:
+                print("Error: must be format dd/mm/yyyy ")
+        while True:
+            self.customer_checkout_date = input(
+                "Enter Customer CheckOutDate  (day/month/year) = \n"
+            )
+            try:
+                self.customer_checkout_date = datetime.strptime(
+                    self.customer_checkout_date, "%d/%m/%Y"
+                ).strftime("%d/%m/%Y")
 
                 break
             except ValueError:
                 print("Error: must be format dd/mm/yyyy ")
         self.num_of_nights = (
-            datetime.strptime(self.ctm_checkout, "%d/%m/%Y").date() -
-            datetime.strptime(self.ctm_checkin, "%d/%m/%Y").date()
+            datetime.strptime(self.customer_checkout_date, "%d/%m/%Y").date()
+            - datetime.strptime(self.customer_checkin_date, "%d/%m/%Y").date()
         )
         self.num_of_nights = self.num_of_nights.days
         while True:
             print(
-                "Standard Room Price -->                 £200 AND Deluxe Room"
-                " Price --> £400"
+                " Standard Room Price --> £200 AND Deluxe Room Price --> £400"
             )
             choice = int(
                 input(
-                    "Select Room Type                (Enter 1 for Standard or"
-                    " 2 for Deluxe) = \n"
+                    "Select Room Type (Enter 1 for Standard or 2 for Deluxe)"
+                    " = \n"
                 )
             )
             try:
@@ -198,11 +202,11 @@ class Customer:
                 * self.num_of_guests
             )
         elif self.room_type == "deluxe":
-            self.total_price = [
+            self.total_price = (
                 int(self.num_of_nights)
                 * self.deluxe_room_price
                 * self.num_of_guests
-            ]
+            )
         self.total_price = self.total_price
         return self.total_price
 
@@ -213,11 +217,11 @@ class Customer:
         print("\n************************\n")
         print("Customer ID =        " + str(self.customer_id[0]))
         print("Customer Name =      " + self.customer_name)
-        print("Customer Age =       " + str(self.ctm_age))
-        print("Customer telephone = " + self.ctm_phone)
+        print("Customer Age =       " + str(self.customer_age))
+        print("Customer telephone = " + self.customer_telephone)
         print("Room Type =          " + self.room_type)
-        print("Customer Check-in=   " + str(self.ctm_checkin))
-        print("Customer Check-out=  " + str(self.ctm_checkout))
+        print("Customer Check-in=   " + str(self.customer_checkin_date))
+        print("Customer Check-out=  " + str(self.customer_checkout_date))
         print("Total Price =        " + str(self.calculations()) + "£")
         print("\n************************\n")
 
@@ -228,10 +232,10 @@ class Customer:
         data = []
         data.append(self.customer_id[0])
         data.append(self.customer_name)
-        data.append(self.ctm_age)
-        data.append(self.ctm_phone)
-        data.append(str(self.ctm_checkin))
-        data.append(str(self.ctm_checkout))
+        data.append(self.customer_age)
+        data.append(self.customer_telephone)
+        data.append(str(self.customer_checkin_date))
+        data.append(str(self.customer_checkout_date))
         data.append(self.room_type)
         if self.room_type == "standard":
             data.append(self.standard_room_price)
@@ -292,13 +296,14 @@ def main():
                                         clearScreen()
                                 else:
                                     raise Exception(
-                                        "Customerdoesnt exist yet!"
+                                        "Customer doesnt exist yet!"
                                     )
                             except:
                                 input("Customer does not exist yet!")
                                 clearScreen()
                                 sub_booking_menu()
                                 clearScreen()
+
                         elif subMenu == 3:
                             clearScreen()
                             break
@@ -358,7 +363,7 @@ def display_customer_data(item):
 
 def display_all_bookings():
     """
-    Functiont to display all created
+    Function to display all created 
     bookings within the spreadsheet to the terminal
     """
     bookings_worksheet_data = SHEET.worksheet("bookings")
