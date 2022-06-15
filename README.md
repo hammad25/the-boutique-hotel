@@ -75,11 +75,18 @@ In this project I have created a hotel bookings management system that links to 
   ### Libraries
   * [Git](https://git-scm.com/) - Git was used to managing the code. Allowing me to create backups whenever significant changes were made to code by utilizing the gitpod terminal to commit to Git and Push to GitHub.
   * [GitHub:](https://github.com/) - GitHub was used to externally store repository and site deployment.
-  * [Os](https://docs.python.org/3/library/os.html "Link to os homepage") -Os library was used to clear the previous print statement in the terminal.
+  * [Os](https://docs.python.org/3/library/os.html "Link to os homepage") -Os library was used to clear the previous print statement in the terminal. The OS module in Python provides functions for interacting with the operating system. Allowing me to perfome functionality between Windows and Mac operating systems.
   * [Datetime](https://docs.python.org/3/library/datetime.html "Link to time homepage") - Time library was used to for check-in/check-out, no. of nights
   * [Random](https://www.programiz.com/python-programming/modules/random "Link to random homepage")- Random library was used to get random booking ID
   * [Am I Responsive?](http://ami.responsivedesign.is/# "Link to Am I Responsive Homepage")- Am I Responsive? was used to see if the site is responsive on different types of devices.
-  * [Lucid](https://www.lucidchart.com/) - To create the flow chart 
+  * [Lucid](https://www.lucidchart.com/ "Link to Lucid") - To create the flow chart 
+  * [platform](https://docs.python.org/3/library/platform.html "Link to platform")- Returns the system/OS name, such as 'Linux', 'Darwin', 'Java', 'Windows'.
+  * [Gspread](https://docs.gspread.org/en/latest/ "Link to gspread")-  gspread is a Python API for Google Sheets. Features: Google Sheets API v4. Open a spreadsheet by title, key or url. Read, write, and format cell ranges.
+  * [Credentials](https://www.manageengine.com/products/asset-explorer/help/scanning_it_assets/credential_library.html "Link to creds")-  A credential file is nothing but just a configuration file with a tad bit of encryption and an unseen security structure in the backend. 
+
+
+
+import gspread
 
 ## Testing
 ### test cases
@@ -113,8 +120,23 @@ In this project I have created a hotel bookings management system that links to 
 
   ![Booking](./assets/readme-files/test-bug-fixed.png)
 
+* Line to long error
+  ![line](./assets/readme-files/error-line-to-long.png)
+  * To resolve this error I used the black formatter
+  - In the terminal enter "Pip3 install black"
+  - Then enter "$ black -l 79 --preview run.py"
+
+* Comparison False 
+  ![comparison](./assets/readme-files/error-comparison.png)
+  ![comparison](./assets/readme-files/error-comparison-code.png)
+  - To resolve this error I use "is"
+  ![comparison](./assets/readme-files/error-comparison-code-fixed.png)
+
+
   ### Validation
   * [PEP8](http://pep8online.com/) was used to check code errors
+  * ![PEP8](./assets/readme-files/Fixed-all-errors.png)
+
 
 ## Deployment
 ### GitHub 

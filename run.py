@@ -93,7 +93,7 @@ class Customer:
                 if self.customer_name.isalpha():
                     break
                 elif self.customer_name.isdigit():
-                    print("Please enter alphabetic characters only")
+                    print("Error: Please enter alphabetic characters only")
             except ValueError():
                 print("Please enter valid input")
 
@@ -101,12 +101,12 @@ class Customer:
             self.customer_telephone = input("Enter Customer Telephone = \n")
             try:
                 if (
-                    len(self.customer_telephone) == 11
-                    and self.customer_telephone.isnumeric()
+                    len(self.customer_telephone) == 11 and
+                    self.customer_telephone.isnumeric()
                 ):
                     break
                 else:
-                    print("please enter a 11 digit number")
+                    print("Error: please enter a 11 digit number")
             except ValueError():
                 print("please enter a number")
 
@@ -145,13 +145,13 @@ class Customer:
             except ValueError:
                 print("Error: must be format dd/mm/yyyy ")
         self.num_of_nights = (
-            datetime.strptime(self.customer_checkout_date, "%d/%m/%Y").date()
-            - datetime.strptime(self.customer_checkin_date, "%d/%m/%Y").date()
+            datetime.strptime(self.customer_checkout_date, "%d/%m/%Y").date() -
+            datetime.strptime(self.customer_checkin_date, "%d/%m/%Y").date()
         )
         self.num_of_nights = self.num_of_nights.days
         while True:
             print(
-                "Standard Room Price --> £200 AND Deluxe Room Price --> £400"
+                " Standard Room Price --> £200 AND Deluxe Room Price --> £400"
             )
             choice = int(
                 input(
@@ -167,9 +167,9 @@ class Customer:
                     self.room_type = "deluxe"
                     break
                 else:
-                    print("\n please choice valid option!")
+                    print("\n Error: please choice valid option!")
             except ValueError:
-                print("Please enter a number!")
+                print("Error: Please enter a number!")
         while True:
             try:
                 self.num_of_guests = int(
@@ -180,7 +180,7 @@ class Customer:
                 else:
                     print("Guests must be between 1 to 3")
             except ValueError:
-                print("Please enter a number!")
+                print("Error: Please enter a number!")
         if update is False:
             input("Press any key to continue... \n")
             clearScreen()
@@ -197,15 +197,15 @@ class Customer:
         """
         if self.room_type == "standard":
             self.total_price = (
-                int(self.num_of_nights)
-                * self.standard_room_price
-                * self.num_of_guests
+                int(self.num_of_nights) *
+                self.standard_room_price *
+                self.num_of_guests
             )
         elif self.room_type == "deluxe":
             self.total_price = (
-                int(self.num_of_nights)
-                * self.deluxe_room_price
-                * self.num_of_guests
+                int(self.num_of_nights) *
+                self.deluxe_room_price *
+                self.num_of_guests
             )
         self.total_price = self.total_price
         return self.total_price
@@ -222,7 +222,7 @@ class Customer:
         print("Room Type =          " + self.room_type)
         print("Customer Check-in=   " + str(self.customer_checkin_date))
         print("Customer Check-out=  " + str(self.customer_checkout_date))
-        print("Total Price =        " + "£" + str(self.calculations()) )
+        print("Total Price =        " + str(self.calculations()) + "£")
         print("\n************************\n")
 
     def make_booking_list(self):
@@ -267,7 +267,7 @@ def main():
         try:
             choice = int(input("Enter your choice: \n"))
         except ValueError:
-            print("Please enter a number")
+            print("Error: Please enter a number")
         else:
             clearScreen()
             while True:
@@ -276,7 +276,7 @@ def main():
                     try:
                         subMenu = int(input("Enter your choice = \n"))
                     except ValueError:
-                        print("Please enter a number")
+                        print("Error: Please enter a valid number")
                     else:
                         if subMenu == 1:
                             CustomerList.append(Customer())
@@ -296,7 +296,7 @@ def main():
                                         clearScreen()
                                 else:
                                     raise Exception(
-                                        "Customer doesnt exist yet!"
+                                        "Customer does not exist yet!"
                                     )
                             except:
                                 input("Customer does not exist yet!")
@@ -308,14 +308,14 @@ def main():
                             clearScreen()
                             break
                         else:
-                            print("Please select a valid choice")
+                            print("Error: Please select a valid number")
                 if choice == 2:
                     clearScreen()
                     sub_booking_display_menu()
                     try:
                         subMenu = int(input("Enter your choice = \n"))
                     except ValueError:
-                        print("Please enter a number")
+                        print("Error: Please enter a valid number")
                     else:
                         if subMenu == 1:
                             display_all_bookings()
@@ -328,7 +328,7 @@ def main():
                 if choice == 3:
                     quit()
                 if choice > 3:
-                    print("Please select a valid choice")
+                    print("Error: Please Enter a valid choice")
                     break
 
 
@@ -363,7 +363,7 @@ def display_customer_data(item):
 
 def display_all_bookings():
     """
-    Function to display all created 
+    Function to display all created
     bookings within the spreadsheet to the terminal
     """
     bookings_worksheet_data = SHEET.worksheet("bookings")
