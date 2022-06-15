@@ -121,7 +121,7 @@ class Customer:
             try:
                 self.ctm_checkin = datetime.strptime(
                     self.ctm_checkin, "%d/%m/%Y"
-                ).strftime()
+                ).strftime("%d/%m/%Y")
                 break
             except ValueError:
                 print("Error: must be format dd/mm/yyyy ")
