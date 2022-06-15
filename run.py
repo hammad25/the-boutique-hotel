@@ -185,8 +185,10 @@ class Customer:
         Function to calculate room price
         """
         if(self.room_type == "standard"):
-            self.total_price = int(self.num_of_nights)\
-                                + *self.standard_room_price*self.num_of_guests
+            self.total_price = (
+                int(self.num_of_nights)
+                * self.standard_room_price*self.num_of_guests
+                )
         elif(self.room_type == "deluxe"):
             self.total_price = [int(self.num_of_nights)*self.
                                 deluxe_room_price*self.num_of_guests]
