@@ -92,7 +92,7 @@ class Customer:
                 if (self.customer_name.isalpha()):
                     break
                 elif (self.customer_name.isdigit()):
-                    print("Please enter alphabetic characters only")
+                    print("Error: Input can be alphabetic characters only")
             except ValueError():
                 print("Please enter valid input")
 
@@ -109,8 +109,10 @@ class Customer:
         while True:
             self.ctm_age = input("Enter Customer Age (day/month/year) = \n")
             try:
-                self.ctm_age = (datetime.strptime
-                                (self.ctm_age, "%d/%m/%Y").strftime())
+                self.ctm_age = (
+                    datetime.strptime(self.ctm_age, "%d/%m/%Y").
+                    strftime("%d/%m/%Y")
+                    )
                 break
             except ValueError:
                 print("Error: must be format dd/mm/yyyy ")
@@ -136,9 +138,11 @@ class Customer:
                 break
             except ValueError:
                 print("Error: must be format dd/mm/yyyy ")
-        self.num_of_nights = (datetime.strptime(self.ctm_checkout,
-                              "%d/%m/%Y").date()-datetime.
-                              strptime(self.ctm_checkin, "%d/%m/%Y").date())
+        self.num_of_nights = (
+            datetime.strptime(self.ctm_checkout,
+            "%d/%m/%Y").date()-datetime.
+            strptime(self.ctm_checkin, "%d/%m/%Y").date()
+            )
         self.num_of_nights = self.num_of_nights.days
         while True:
             print(
@@ -267,8 +271,9 @@ def main():
                             CustomerList.append(Customer())
                             global count
                             CustomerList[count].set_customer_data()
-                            create_booking_worksheet(CustomerList[count]
-                                                     .make_booking_list())
+                            create_booking_worksheet(
+                                CustomerList[count].make_booking_list()
+                                )
                             count = count+1
 
                         elif(subMenu == 2):
