@@ -269,10 +269,10 @@ def main():
     """
 
     CustomerList = []
-    NotValid = False
+    not_valid = False
 
     while True:
-        if NotValid is False:
+        if not_valid is False:
             main_menu()
         try:
             choice = int(input("Enter your choice: \n"))
@@ -282,7 +282,7 @@ def main():
             clearScreen()
             while True:
                 if choice == 1:
-                    NotValid = False
+                    not_valid = False
                     sub_booking_menu()
                     try:
                         subMenu = int(input("Enter your choice = \n"))
@@ -299,7 +299,7 @@ def main():
                             count = count + 1
 
                         elif subMenu == 2:
-                            NotValid = False
+                            not_valid = False
                             try:
                                 if len(CustomerList) != 0:
                                     for i in range(0, len(CustomerList)):
@@ -317,13 +317,13 @@ def main():
                                 clearScreen()
 
                         elif subMenu == 3:
-                            NotValid = False
+                            not_valid = False
                             clearScreen()
                             break
                         else:
                             print("Error: Please select a valid number")
                 if choice == 2:
-                    NotValid = False
+                    not_valid = False
                     clearScreen()
                     sub_booking_display_menu()
                     try:
@@ -348,15 +348,15 @@ def main():
                             sub_booking_display_menu()
 
                 if choice == 3:
-                    NotValid = False
+                    not_valid = False
                     quit()
                 if choice > 3:
-                    NotValid = True
+                    not_valid = True
                     clearScreen()
                     main_menu()
                     input(
-                        """Error: Please Enter a valid choice \n
-                        Press enter to continue..."""
+                        "Error: Please Enter a valid choice \n"
+                        "Press enter to continue..."
                     )
                     clearScreen()
                     main_menu()

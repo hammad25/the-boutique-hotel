@@ -83,6 +83,7 @@ In this project I have created a hotel bookings management system that links to 
   * [platform](https://docs.python.org/3/library/platform.html "Link to platform")- Returns the system/OS name, such as 'Linux', 'Darwin', 'Java', 'Windows'.
   * [Gspread](https://docs.gspread.org/en/latest/ "Link to gspread")-  gspread is a Python API for Google Sheets. Features: Google Sheets API v4. Open a spreadsheet by title, key or url. Read, write, and format cell ranges.
   * [Credentials](https://www.manageengine.com/products/asset-explorer/help/scanning_it_assets/credential_library.html "Link to creds")-  A credential file is nothing but just a configuration file with a tad bit of encryption and an unseen security structure in the backend. 
+  * [re](https://docs.python.org/3/library/re.html) - A regular expression (or RE) specifies a set of strings that matches it;
 
 ## Testing
 ### test cases
@@ -112,6 +113,7 @@ In this project I have created a hotel bookings management system that links to 
 * Broken while loop, when inaccurate booking ID entered, displays error of "Customer doesn't exist with that ID " but does not prompt for ID again.
 
   ![Booking](./assets/readme-files/bug.png)
+  
 * To resolve the bug I removed the while loop and recalled the functions within its self at the end of the code block with in the **else** of an **if/else** statement.
 
   ![Booking](./assets/readme-files/test-bug-fixed.png)
@@ -126,7 +128,8 @@ In this project I have created a hotel bookings management system that links to 
   ![comparison](./assets/readme-files/error-comparison.png)
   ![comparison](./assets/readme-files/error-comparison-code.png)
   - To resolve this error I use "is"
-  ![comparison](./assets/readme-files/error-comparison-code-fixed.png)
+
+  ![comparison](./assets/readme-files/error-comparison-fixed.png)
 
 
   ### Validation
