@@ -84,10 +84,6 @@ In this project I have created a hotel bookings management system that links to 
   * [Gspread](https://docs.gspread.org/en/latest/ "Link to gspread")-  gspread is a Python API for Google Sheets. Features: Google Sheets API v4. Open a spreadsheet by title, key or url. Read, write, and format cell ranges.
   * [Credentials](https://www.manageengine.com/products/asset-explorer/help/scanning_it_assets/credential_library.html "Link to creds")-  A credential file is nothing but just a configuration file with a tad bit of encryption and an unseen security structure in the backend. 
 
-
-
-import gspread
-
 ## Testing
 ### test cases
 * Through out the project I have carried out regular testing using print statments

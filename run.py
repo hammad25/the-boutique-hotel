@@ -1,6 +1,7 @@
 import os
 import platform
 import random
+import re
 from datetime import datetime
 
 import gspread
@@ -16,6 +17,8 @@ CREDS = Credentials.from_service_account_file("creds.json")
 SCOPED_CREDS = CREDS.with_scopes(SCOPE)
 GSPREAD_CLIENT = gspread.authorize(SCOPED_CREDS)
 SHEET = GSPREAD_CLIENT.open("The-Boutique-Hotel")
+
+regex = re.compile("[@_!#$%^&*()<>?/\|}{~:]")
 
 
 def main_menu():
@@ -88,14 +91,19 @@ class Customer:
         until valid data is entered otherwise raise error
         """
         while True:
-            self.customer_name = input("Enter Customer Name = \n")
             try:
+                self.customer_name = input("Enter Customer Name = \n")
                 if self.customer_name.isalpha():
                     break
-                elif self.customer_name.isdigit():
-                    print("Error: Please enter alphabetic characters only")
-            except ValueError():
-                print("Please enter valid input")
+                elif (
+                    self.customer_name.isdigit() or
+                    regex.search(self.customer_name) is not None
+                ):
+                    raise ValueError(
+                        "Error: Please enter alphabetic characters only"
+                    )
+            except:
+                print("Error: Please enter alphabetic characters only")
 
         while True:
             self.customer_telephone = input("Enter Customer Telephone = \n")
@@ -153,13 +161,13 @@ class Customer:
             print(
                 " Standard Room Price --> £200 AND Deluxe Room Price --> £400"
             )
-            choice = int(
-                input(
-                    "Select Room Type (Enter 1 for Standard or 2 for Deluxe)"
-                    " = \n"
-                )
-            )
             try:
+                choice = int(
+                    input(
+                        "Select Room Type (Enter 1 for Standard or 2 for"
+                        " Deluxe) = \n"
+                    )
+                )
                 if choice == 1:
                     self.room_type = "standard"
                     break
@@ -261,9 +269,11 @@ def main():
     """
 
     CustomerList = []
+    NotValid = False
 
     while True:
-        main_menu()
+        if NotValid is False:
+            main_menu()
         try:
             choice = int(input("Enter your choice: \n"))
         except ValueError:
@@ -272,6 +282,7 @@ def main():
             clearScreen()
             while True:
                 if choice == 1:
+                    NotValid = False
                     sub_booking_menu()
                     try:
                         subMenu = int(input("Enter your choice = \n"))
@@ -288,6 +299,7 @@ def main():
                             count = count + 1
 
                         elif subMenu == 2:
+                            NotValid = False
                             try:
                                 if len(CustomerList) != 0:
                                     for i in range(0, len(CustomerList)):
@@ -305,11 +317,13 @@ def main():
                                 clearScreen()
 
                         elif subMenu == 3:
+                            NotValid = False
                             clearScreen()
                             break
                         else:
                             print("Error: Please select a valid number")
                 if choice == 2:
+                    NotValid = False
                     clearScreen()
                     sub_booking_display_menu()
                     try:
@@ -325,10 +339,27 @@ def main():
                         elif subMenu == 3:
                             clearScreen()
                             break
+                        elif subMenu > 3:
+                            input(
+                                "Error: Please Enter a valid choice \nPress"
+                                " enter to continue..."
+                            )
+                            clearScreen()
+                            sub_booking_display_menu()
+
                 if choice == 3:
+                    NotValid = False
                     quit()
                 if choice > 3:
-                    print("Error: Please Enter a valid choice")
+                    NotValid = True
+                    clearScreen()
+                    main_menu()
+                    input(
+                        """Error: Please Enter a valid choice \n
+                        Press enter to continue..."""
+                    )
+                    clearScreen()
+                    main_menu()
                     break
 
 
