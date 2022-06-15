@@ -127,8 +127,7 @@ class Customer:
                 print("Error: must be format dd/mm/yyyy ")
         while True:
             self.ctm_checkout = input(
-                "Enter Customer CheckOutDate                   "
-                " (day/month/year) = \n"
+                "Enter Customer CheckOutDate (day/month/year) = \n"
             )
             try:
                 self.ctm_checkout = [
@@ -141,8 +140,8 @@ class Customer:
             except ValueError:
                 print("Error: must be format dd/mm/yyyy ")
         self.num_of_nights = (
-            datetime.strptime(self.ctm_checkout, "%d/%m/%Y").date()
-            - datetime.strptime(self.ctm_checkin, "%d/%m/%Y").date()
+            datetime.strptime(self.ctm_checkout, "%d/%m/%Y").date() -
+            datetime.strptime(self.ctm_checkin, "%d/%m/%Y").date()
         )
         self.num_of_nights = self.num_of_nights.days
         while True:
