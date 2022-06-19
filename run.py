@@ -1,3 +1,4 @@
+# -*- coding: utf-8 -*-
 import os
 import platform
 import random
@@ -46,17 +47,17 @@ def sub_booking_display_menu():
     Function to display booking options when choose 2 in main_menu()
     """
     print("1. Display all Booking Data")
-    print("2. Display Booking Data by BookingID")
+    print("2. Display Booking Data by Booking ID")
     print("3. Back to main menu")
 
 
-def clearScreen():
+def clear_screen():
     """
     Function to clear screen in Windows or Mac operating system
     """
     if platform.system() == "Windows":
         os.system("cls")
-    elif platform.system() == "Linux" or "Darwin":
+    elif "Linux" or "Darwin" in platform.system():
         os.system("clear")
     else:
         print("*/ PLATFORM NOT SUPPORTED /*")
@@ -85,26 +86,24 @@ class Customer:
         self.standard_room_price = 200
         self.deluxe_room_price = 400
 
-    def set_customer_data(self, update=False):
+    def set_customer_name(self):
         """
-        Function to enter customer data in a While loop with validations
-        until valid data is entered otherwise raise error
+        Function to set the name of the name
         """
         while True:
-            try:
-                self.customer_name = input("Enter Customer Name = \n")
-                if self.customer_name.isalpha():
-                    break
-                elif (
-                    self.customer_name.isdigit() or
-                    regex.search(self.customer_name) is not None
-                ):
-                    raise ValueError(
-                        "Error: Please enter alphabetic characters only"
-                    )
-            except:
+            self.customer_name = input("Enter Customer Name = \n")
+            if self.customer_name.isalpha():
+                break
+            if (
+                self.customer_name.isdigit() or
+                regex.search(self.customer_name) is not None
+            ):
                 print("Error: Please enter alphabetic characters only")
 
+    def set_customer_telephone(self):
+        """
+        Function to set the telephone of the user
+        """
         while True:
             self.customer_telephone = input("Enter Customer Telephone = \n")
             try:
@@ -113,10 +112,18 @@ class Customer:
                     self.customer_telephone.isnumeric()
                 ):
                     break
-                else:
-                    print("Error: please enter a 11 digit number")
+                print("Error: please enter a 11 digit number")
             except ValueError():
                 print("please enter a number")
+
+    def set_customer_data(self, update=False):
+        """
+        Function to enter customer data in a While loop with validations
+        until valid data is entered otherwise raise error
+        """
+        self.set_customer_name()
+
+        self.set_customer_telephone()
 
         while True:
             self.customer_age = input(
@@ -171,11 +178,10 @@ class Customer:
                 if choice == 1:
                     self.room_type = "standard"
                     break
-                elif choice == 2:
+                if choice == 2:
                     self.room_type = "deluxe"
                     break
-                else:
-                    print("\n Error: please choice valid option!")
+                print("\n Error: please choice valid option!")
             except ValueError:
                 print("Error: Please enter a number!")
         while True:
@@ -185,22 +191,21 @@ class Customer:
                 )
                 if self.num_of_guests >= 1 and self.num_of_guests <= 3:
                     break
-                else:
-                    print("Guests must be between 1 to 3")
+                print("Guests must be between 1 to 3")
             except ValueError:
                 print("Error: Please enter a number!")
         if update is False:
             input("Press any key to continue... \n")
-            clearScreen()
+            clear_screen()
 
-    def Total_num_of_customers(self):
+    def total_num_of_customers(self):
         """
         Method to print total number of customers
         """
         print("Total Number Of Customers= " + str(self.total_customers))
 
     def calculations(self):
-        """ "
+        """
         Function to calculate room price
         """
         if self.room_type == "standard":
@@ -218,7 +223,7 @@ class Customer:
         self.total_price = self.total_price
         return self.total_price
 
-    def Get_customer_data(self):
+    def get_customer_data(self):
         """
         Function to display customer data
         """
@@ -255,11 +260,14 @@ class Customer:
 
         return data
 
-    def Get_customer_id(self):
+    def get_customer_id(self):
+        """
+        Function to retrieve customer ID
+        """
         return self.customer_id[0]
 
 
-count = 0
+COUNT = 0
 
 
 def main():
@@ -268,7 +276,7 @@ def main():
     validations
     """
 
-    CustomerList = []
+    customer_list = []
     not_valid = False
 
     while True:
@@ -279,88 +287,95 @@ def main():
         except ValueError:
             print("Error: Please enter a number")
         else:
-            clearScreen()
-            while True:
-                if choice == 1:
-                    not_valid = False
-                    sub_booking_menu()
-                    try:
-                        subMenu = int(input("Enter your choice = \n"))
-                    except ValueError:
-                        print("Error: Please enter a valid number")
-                    else:
-                        if subMenu == 1:
-                            CustomerList.append(Customer())
-                            global count
-                            CustomerList[count].set_customer_data()
-                            create_booking_worksheet(
-                                CustomerList[count].make_booking_list()
-                            )
-                            count = count + 1
+            clear_screen()
+            display_menus(customer_list, choice)
 
-                        elif subMenu == 2:
-                            not_valid = False
-                            try:
-                                if len(CustomerList) != 0:
-                                    for i in range(0, len(CustomerList)):
-                                        CustomerList[i].Get_customer_data()
-                                        input("Press any key to continue...")
-                                        clearScreen()
-                                else:
-                                    raise Exception(
-                                        "Customer does not exist yet!"
-                                    )
-                            except:
-                                input("Customer does not exist yet!")
-                                clearScreen()
-                                sub_booking_menu()
-                                clearScreen()
 
-                        elif subMenu == 3:
-                            not_valid = False
-                            clearScreen()
-                            break
-                        else:
-                            print("Error: Please select a valid number")
-                if choice == 2:
-                    not_valid = False
-                    clearScreen()
-                    sub_booking_display_menu()
-                    try:
-                        subMenu = int(input("Enter your choice = \n"))
-                    except ValueError:
-                        print("Error: Please enter a valid number")
-                    else:
-                        if subMenu == 1:
-                            display_all_bookings()
-                        elif subMenu == 2:
-                            display_by_booking_ID()
-                            break
-                        elif subMenu == 3:
-                            clearScreen()
-                            break
-                        elif subMenu > 3:
-                            input(
-                                "Error: Please Enter a valid choice \nPress"
-                                " enter to continue..."
-                            )
-                            clearScreen()
-                            sub_booking_display_menu()
-
-                if choice == 3:
-                    not_valid = False
-                    quit()
-                if choice > 3:
-                    not_valid = True
-                    clearScreen()
-                    main_menu()
-                    input(
-                        "Error: Please Enter a valid choice \n"
-                        "Press enter to continue..."
+def display_menus(customer_list, choice):
+    """
+    Function to navigate the main menu and sub menus
+    """
+    while True:
+        if choice == 1:
+            not_valid = False
+            sub_booking_menu()
+            try:
+                sub_menu = int(input("Enter your choice = \n"))
+            except ValueError:
+                print("Error: Please enter a valid number")
+            else:
+                if sub_menu == 1:
+                    customer_list.append(Customer())
+                    global COUNT
+                    customer_list[COUNT].set_customer_data()
+                    create_booking_worksheet(
+                        customer_list[COUNT].make_booking_list()
                     )
-                    clearScreen()
-                    main_menu()
+                    COUNT = COUNT + 1
+
+                elif sub_menu == 2:
+                    not_valid = False
+                    try:
+                        if len(customer_list) != 0:
+                            for i in range(0, len(customer_list)):
+                                customer_list[i].get_customer_data()
+                                input("Press any key to continue...")
+                                clear_screen()
+                        else:
+                            raise Exception(
+                                "Customer does not exist yet!"
+                            )
+                    except:
+                        input("Customer does not exist yet!")
+                        clear_screen()
+                        sub_booking_menu()
+                        clear_screen()
+
+                elif sub_menu == 3:
+                    not_valid = False
+                    clear_screen()
                     break
+                else:
+                    print("Error: Please select a valid number")
+        if choice == 2:
+            not_valid = False
+            clear_screen()
+            sub_booking_display_menu()
+            try:
+                sub_menu = int(input("Enter your choice = \n"))
+            except ValueError:
+                print("Error: Please enter a valid number")
+            else:
+                if sub_menu == 1:
+                    display_all_bookings()
+                elif sub_menu == 2:
+                    display_booking_by_id()
+                    break
+                elif sub_menu == 3:
+                    clear_screen()
+                    break
+                elif sub_menu > 3:
+                    input(
+                        "Error: Please Enter a valid choice \nPress"
+                        " enter to continue..."
+                    )
+                    clear_screen()
+                    sub_booking_display_menu()
+
+        if choice == 3:
+            not_valid = False
+            quit()
+        if choice == 0 or choice > 3:
+            not_valid = True
+            clear_screen()
+            main_menu()
+            input(
+                "Error: Please Enter a valid choice \n"
+                "Press enter to continue..."
+            )
+            clear_screen()
+            main_menu()
+            break
 
 
 def create_booking_worksheet(data):
@@ -407,7 +422,7 @@ def display_all_bookings():
     input("\nPress any key to continue...\n")
 
 
-def display_by_booking_ID():
+def display_booking_by_id():
     """
     Function to get and display a certain booking using a booking ID number
     """
@@ -415,14 +430,18 @@ def display_by_booking_ID():
     bookings_worksheet_data = bookings_worksheet_data.get_all_values()
     bookings_worksheet_data = bookings_worksheet_data[1:]
 
-    id = input("Enter an Id = \n")
+    i_d = input("Enter an Id = \n")
     for item in bookings_worksheet_data:
-        if id == item[0]:
+        if i_d == item[0]:
             display_customer_data(item)
             break
     else:
-        print("Customer does not exist with this ID")
-        display_by_booking_ID()
+        input(
+            "Error:Customer does not exist with this ID \n"
+            "Press enter to try again..."
+        )
+        display_booking_by_id()
 
 
-main()
+if __name__ == '__main__':
+    main()
